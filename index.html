@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>My  🎀</title>
+<title>My ffhhf 🎀</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
@@ -367,7 +367,7 @@ button .ripple {
 .paper {
   max-width: 900px;
   margin: 0 auto 4rem;
-  padding: clamp(2.5rem, 7vw, 4.5rem) clamp(1.8rem, 7vw, 4rem);
+  padding: clamp(1.2rem, 4vw, 2.5rem) clamp(1.2rem, 5vw, 3rem);
   background: linear-gradient(175deg, #FFF9F5 0%, #FEF0F3 45%, #FDE6EC 80%, #FCDEE8 100%);
   border: 1.5px solid var(--gold);
   border-radius: 8px;
@@ -384,6 +384,7 @@ button .ripple {
   background-repeat: no-repeat;
   top: 8px;
   left: 8px;
+  pointer-events: none;
 }
 
 .paper::after {
@@ -396,51 +397,49 @@ button .ripple {
 
 .paper h2 {
   font-family: var(--display);
-  font-size: clamp(2.4rem, 7vw, 3.2rem);
+  font-size: clamp(1.7rem, 5vw, 2.4rem);
   text-align: center;
   font-style: italic;
-  margin-bottom: 2rem;
+  margin-bottom: 1.3rem;
   color: var(--burg);
   letter-spacing: 0.02em;
   text-shadow: 0 1px 4px rgba(255, 248, 240, 0.9);
   position: relative;
-  padding-bottom: 1rem;
+  padding-bottom: 0.7rem;
   text-transform: uppercase;
 }
 
 .paper h2::after {
   content: '❀ ♡ ❀';
   display: block;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: var(--gold);
   letter-spacing: 0.8rem;
-  margin-top: 0.8rem;
+  margin-top: 0.5rem;
   font-style: normal;
 }
 
 /* ===== LETTER TEXT STYLING ===== */
 .letter p {
   font-family: var(--serif);
-  font-size: clamp(1.15rem, 3vw, 1.6rem);
+  font-size: clamp(1rem, 2.6vw, 1.3rem);
   font-weight: 500;
-  line-height: 1.8;
-  margin-bottom: 1.4rem;
+  line-height: 1.7;
+  margin-bottom: 0;
   white-space: pre-line;
   color: var(--burg);
   letter-spacing: 0.01em;
   text-transform: uppercase;
+  text-align: center;
 }
-
-.letter p:last-child { margin-bottom: 0; }
 
 /* First paragraph: title-like line */
 #letter .letter-title {
   font-family: var(--display);
   font-style: italic;
-  font-size: clamp(1.5rem, 4.5vw, 2.1rem);
+  font-size: clamp(1.2rem, 3.2vw, 1.6rem);
   text-align: center;
   line-height: 1.5;
-  margin-bottom: 1.8rem;
   color: var(--burg);
   text-shadow: 0 1px 6px rgba(255, 248, 240, 0.9);
 }
@@ -448,15 +447,14 @@ button .ripple {
 /* Last paragraph: soft gold dashed box like .sign */
 #letter .letter-sign {
   font-family: var(--serif);
-  font-size: clamp(1.15rem, 3vw, 1.6rem);
+  font-size: clamp(1rem, 2.6vw, 1.3rem);
   font-weight: 500;
-  line-height: 1.8;
+  line-height: 1.7;
   text-align: center;
   background: rgba(255, 248, 240, 0.85);
   border: 2px dashed var(--gold);
   border-radius: 12px;
-  padding: 1.5rem 1.3rem;
-  margin-top: 1.6rem;
+  padding: 1.2rem 1rem;
   color: var(--burg);
   text-transform: uppercase;
   box-shadow: 0 4px 16px rgba(199, 125, 145, 0.12);
@@ -475,15 +473,6 @@ button .ripple {
   transform: none;
   filter: blur(0);
 }
-
-/* stagger delays inside letter */
-#letter .rv:nth-child(1) { transition-delay: 0s; }
-#letter .rv:nth-child(2) { transition-delay: 0.08s; }
-#letter .rv:nth-child(3) { transition-delay: 0.16s; }
-#letter .rv:nth-child(4) { transition-delay: 0.24s; }
-#letter .rv:nth-child(5) { transition-delay: 0.32s; }
-#letter .rv:nth-child(6) { transition-delay: 0.4s; }
-#letter .rv:nth-child(7) { transition-delay: 0.48s; }
 
 .orn {
   text-align: center;
@@ -1079,126 +1068,24 @@ footer p:first-child {
   100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.3); opacity: 0; }
 }
 
-/* ========== MUSIC BUTTON ========== */
-#musicToggle {
-  position: fixed;
-  bottom: max(20px, env(safe-area-inset-bottom));
-  right: 18px;
-  z-index: 99999;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: 2px solid var(--gold);
-  background: linear-gradient(135deg, var(--rose) 0%, var(--burg) 100%);
-  color: var(--cream);
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 8px 24px rgba(113, 59, 77, 0.35), 0 2px 8px rgba(201, 169, 110, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  -webkit-tap-highlight-color: transparent;
-  padding: 0;
-  line-height: 1;
-}
-
-#musicToggle:hover {
-  transform: scale(1.1);
-  box-shadow: 0 12px 30px rgba(113, 59, 77, 0.45), 0 4px 12px rgba(201, 169, 110, 0.4);
-}
-
-#musicToggle:active {
-  transform: scale(0.95);
-}
-
-/* fallback play button */
-#musicFallback {
-  position: fixed;
-  bottom: max(90px, calc(env(safe-area-inset-bottom) + 70px));
-  right: 18px;
-  z-index: 99999;
-  display: none;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 6px;
-}
-
-#musicFallback.show {
-  display: flex;
-}
-
-#musicFallback button {
-  font-size: 0.9rem;
-  padding: 0.7rem 1.2rem;
-  border-radius: 40px;
-  animation: pulseFallback 1.6s ease-in-out infinite;
-  white-space: nowrap;
-}
-
-@keyframes pulseFallback {
-  0%, 100% { box-shadow: 0 8px 24px rgba(113, 59, 77, 0.35), 0 0 0 0 rgba(201, 169, 110, 0.5); }
-  50% { box-shadow: 0 8px 24px rgba(113, 59, 77, 0.35), 0 0 0 10px rgba(201, 169, 110, 0.1); }
-}
-
-#musicFallbackMsg {
-  font-family: var(--cute);
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: #B8306B;
-  background: rgba(255, 248, 240, 0.95);
-  padding: 0.3rem 0.7rem;
-  border-radius: 20px;
-  border: 1px solid var(--gold);
-  display: none;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  max-width: 210px;
-  text-align: right;
-  line-height: 1.3;
-}
-
-#musicFallbackMsg.show {
-  display: block;
-}
-
 /* ========== LETTER READER (ONE PARAGRAPH AT A TIME) ========== */
 #letter {
   position: relative;
-  min-height: 280px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
+  display: block;
 }
 
 #letter .letter-stage {
-  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
   width: 100%;
-  max-height: 42vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.4rem 0.2rem;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: var(--rose) var(--blush);
-}
-
-#letter .letter-stage::-webkit-scrollbar {
-  width: 6px;
-}
-#letter .letter-stage::-webkit-scrollbar-track {
-  background: transparent;
-}
-#letter .letter-stage::-webkit-scrollbar-thumb {
-  background: var(--rose);
-  border-radius: 6px;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
 }
 
 #letter .letter-slide {
+  grid-area: 1 / 1;
   width: 100%;
   margin: 0;
   transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
@@ -1254,6 +1141,8 @@ footer p:first-child {
   gap: 0.8rem;
   margin-top: 1.6rem;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 3;
 }
 
 #letter .letter-controls button {
@@ -1278,8 +1167,10 @@ footer p:first-child {
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
-  margin-top: 1rem;
+  margin-top: 1.1rem;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 3;
 }
 
 #letter .progress-dots .dot {
@@ -1303,9 +1194,11 @@ footer p:first-child {
   font-weight: 700;
   color: var(--rose);
   text-align: center;
-  margin-top: 0.6rem;
+  margin-top: 0.7rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  position: relative;
+  z-index: 3;
 }
 
 /* heart burst on next */
@@ -1329,7 +1222,7 @@ footer p:first-child {
   .katgolap-corner.tr { width: 210px; height: 210px; top: -35px; right: -45px; }
   .katgolap-corner.bl { width: 200px; height: 200px; bottom: -45px; left: -35px; }
   .katgolap-corner.br { width: 215px; height: 215px; bottom: -40px; right: -40px; }
-  .paper { padding: 2rem 1.2rem; }
+  .paper { padding: 1.4rem 1rem; }
   .paper::before, .paper::after { width: 70px; height: 70px; }
   .grid { grid-template-columns: 1fr; }
   .card { border-radius: 40px 40px 14px 14px; padding: 1.6rem 1.1rem; }
@@ -1338,17 +1231,14 @@ footer p:first-child {
   .hug-illustration svg { width: 110px; }
   .ending-hug svg { width: 120px; }
   .float-decor { display: none; }
-  #letter .letter-title { font-size: clamp(1.3rem, 5vw, 1.6rem); }
-  #letter .letter-sign { padding: 1.2rem 1rem; }
-  #letter .letter-stage { max-height: 38vh; }
-  #musicToggle { width: 48px; height: 48px; font-size: 1.25rem; bottom: max(14px, env(safe-area-inset-bottom)); right: 14px; }
-  #musicFallback { right: 14px; bottom: max(80px, calc(env(safe-area-inset-bottom) + 60px)); }
+  #letter .letter-title { font-size: clamp(1.05rem, 4.2vw, 1.3rem); }
+  #letter .letter-sign { padding: 1rem 0.85rem; }
 }
 
 @media (min-width: 1200px) {
   #welcome h1 { font-size: 5rem; }
   #welcome .surprise-text { font-size: 2.2rem; }
-  .letter p { font-size: 1.6rem; }
+  .letter p { font-size: 1.3rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1724,21 +1614,15 @@ footer p:first-child {
   </footer>
 </div>
 
-<!-- ========== MUSIC TOGGLE BUTTON (floating) ========== -->
-<button id="musicToggle" type="button" aria-label="Toggle music">🔊</button>
-
-<!-- ========== MUSIC FALLBACK ========== -->
-<div id="musicFallback">
-  <button id="musicFallbackBtn" type="button">▶ PLAY MUSIC 🎵</button>
-  <div id="musicFallbackMsg">Song file not found — please check the filename 🎵</div>
-</div>
-
 <script>
 (function () {
   'use strict';
 
   // CHANGE MUSIC FILENAME HERE
-  var MUSIC_FILE = "SANAM RE Title Song FULL VIDEO _ Pulkit Samrat, Yami Gautam, Urvashi Rautela _ Divya Khosla Kumar.mp3";
+  var MUSIC_FILES = [
+    "SANAM RE Title  Song FULL VIDEO _ Pulkit Samrat, Yami Gautam, Urvashi Rautela _ Divya Khosla Kumar.mp3",   // two spaces after Title
+    "SANAM RE Title Song FULL VIDEO _ Pulkit Samrat, Yami Gautam, Urvashi Rautela _ Divya Khosla Kumar.mp3"     // one space fallback
+  ];
 
   // ===== ELEMENT REFERENCES =====
   var nameScreen = document.getElementById('name-screen');
@@ -1762,7 +1646,6 @@ footer p:first-child {
 
   // Letter reader elements
   var letterEl = document.getElementById('letter');
-  var letterStage = letterEl ? letterEl.querySelector('.letter-stage') : null;
   var letterNextBtn = document.getElementById('letterNextBtn');
   var letterBackBtn = document.getElementById('letterBackBtn');
   var letterDots = document.getElementById('letterDots');
@@ -1770,37 +1653,51 @@ footer p:first-child {
   var letterOrnament = document.getElementById('letterOrnament');
   var letterSlides = letterEl ? Array.prototype.slice.call(letterEl.querySelectorAll('.letter-slide')) : [];
 
-  // Music elements
-  var musicToggle = document.getElementById('musicToggle');
-  var musicFallback = document.getElementById('musicFallback');
-  var musicFallbackBtn = document.getElementById('musicFallbackBtn');
-  var musicFallbackMsg = document.getElementById('musicFallbackMsg');
-
   // ===== STATE =====
   var visitorName = '';
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ===== MUSIC SYSTEM =====
+  // ===== MUSIC SYSTEM (invisible) =====
   var audio = null;
+  var musicFileIndex = 0;
   var musicStarted = false;
-  var musicMuted = false;
   var musicFadeTimer = null;
   var targetVolume = 0.4;
+  var retryListenerArmed = false;
 
-  function buildAudio() {
-    if (audio) return;
+  function buildAudio(index) {
+    if (audio) {
+      // clean up old audio
+      audio.pause();
+      audio.onerror = null;
+      audio = null;
+    }
+    musicFileIndex = index;
+    var file = MUSIC_FILES[musicFileIndex];
+    if (!file) return false;
     try {
-      audio = new Audio(encodeURI(MUSIC_FILE));
+      audio = new Audio(encodeURI(file));
       audio.loop = true;
       audio.volume = 0;
       audio.preload = 'auto';
-      audio.addEventListener('error', function () {
-        // file failed to load
-        showMusicFallback(true);
-      });
+      audio.addEventListener('error', handleAudioError);
+      return true;
     } catch (e) {
-      showMusicFallback(true);
+      return false;
     }
+  }
+
+  function handleAudioError() {
+    // try next file silently
+    var nextIndex = musicFileIndex + 1;
+    if (nextIndex < MUSIC_FILES.length) {
+      buildAudio(nextIndex);
+      if (audio && musicStarted) {
+        // try to keep playing the next candidate
+        audio.play().catch(function () {});
+      }
+    }
+    // if no more files, do nothing (silent)
   }
 
   function fadeInMusic() {
@@ -1812,99 +1709,84 @@ footer p:first-child {
     musicFadeTimer = setInterval(function () {
       var elapsed = Date.now() - start;
       var t = Math.min(elapsed / duration, 1);
-      // ease out
       var vol = targetVolume * (1 - Math.pow(1 - t, 2));
-      audio.volume = Math.min(vol, targetVolume);
+      try { audio.volume = Math.min(vol, targetVolume); } catch (e) {}
       if (t >= 1) {
         clearInterval(musicFadeTimer);
         musicFadeTimer = null;
-        audio.volume = targetVolume;
+        try { audio.volume = targetVolume; } catch (e) {}
       }
     }, 50);
   }
 
+  function armRetryOnInteraction() {
+    if (retryListenerArmed) return;
+    retryListenerArmed = true;
+    function retry() {
+      document.removeEventListener('click', retry);
+      document.removeEventListener('touchstart', retry);
+      document.removeEventListener('keydown', retry);
+      retryListenerArmed = false;
+      if (!audio) return;
+      try {
+        var p = audio.play();
+        if (p && typeof p.then === 'function') {
+          p.then(function () {
+            musicStarted = true;
+            fadeInMusic();
+          }).catch(function () {});
+        }
+      } catch (e) {}
+    }
+    document.addEventListener('click', retry, { once: true });
+    document.addEventListener('touchstart', retry, { once: true, passive: true });
+    document.addEventListener('keydown', retry, { once: true });
+  }
+
   function startMusicDirectly() {
     // MUST be called directly inside a user gesture handler
-    buildAudio();
-    if (!audio) return;
+    if (!audio) {
+      if (!buildAudio(0)) return;
+    }
     try {
       var playPromise = audio.play();
       if (playPromise && typeof playPromise.then === 'function') {
         playPromise.then(function () {
           musicStarted = true;
-          musicMuted = false;
-          musicToggle.textContent = '🔊';
-          musicToggle.setAttribute('aria-label', 'Mute music');
           fadeInMusic();
-          hideMusicFallback();
         }).catch(function () {
-          // blocked
-          showMusicFallback(true);
+          // blocked — try next file silently, then arm one-time retry
+          if (musicFileIndex + 1 < MUSIC_FILES.length) {
+            buildAudio(musicFileIndex + 1);
+            if (audio) {
+              try {
+                var p2 = audio.play();
+                if (p2 && typeof p2.then === 'function') {
+                  p2.then(function () {
+                    musicStarted = true;
+                    fadeInMusic();
+                  }).catch(function () {
+                    armRetryOnInteraction();
+                  });
+                }
+              } catch (e) {
+                armRetryOnInteraction();
+              }
+            }
+          } else {
+            armRetryOnInteraction();
+          }
         });
       } else {
         musicStarted = true;
-        musicMuted = false;
-        musicToggle.textContent = '🔊';
-        musicToggle.setAttribute('aria-label', 'Mute music');
         fadeInMusic();
       }
     } catch (e) {
-      showMusicFallback(true);
+      armRetryOnInteraction();
     }
   }
 
-  function showMusicFallback(show) {
-    if (!musicFallback) return;
-    if (show) {
-      musicFallback.classList.add('show');
-    } else {
-      musicFallback.classList.remove('show');
-      musicFallbackMsg.classList.remove('show');
-    }
-  }
-
-  function hideMusicFallback() {
-    if (!musicFallback) return;
-    musicFallback.classList.remove('show');
-    musicFallbackMsg.classList.remove('show');
-  }
-
-  function toggleMute() {
-    if (!audio) return;
-    if (!musicStarted) {
-      // try to start
-      startMusicDirectly();
-      return;
-    }
-    if (musicMuted) {
-      audio.muted = false;
-      audio.volume = targetVolume;
-      musicMuted = false;
-      musicToggle.textContent = '🔊';
-      musicToggle.setAttribute('aria-label', 'Mute music');
-    } else {
-      audio.muted = true;
-      musicMuted = true;
-      musicToggle.textContent = '🔇';
-      musicToggle.setAttribute('aria-label', 'Unmute music');
-    }
-  }
-
-  if (musicToggle) {
-    musicToggle.addEventListener('click', function (e) {
-      e.stopPropagation();
-      toggleMute();
-    });
-  }
-
-  if (musicFallbackBtn) {
-    musicFallbackBtn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      startMusicDirectly();
-    });
-  }
-
-  // Pause music when tab hidden, resume when visible
+  // Pause when tab hidden, resume when visible
   document.addEventListener('visibilitychange', function () {
     if (!audio) return;
     if (document.hidden) {
@@ -2065,7 +1947,6 @@ footer p:first-child {
   }
 
   function updateLetterUI() {
-    // slides visibility
     for (var i = 0; i < letterTotal; i++) {
       if (i === currentLetterIndex) {
         letterSlides[i].classList.remove('hidden');
@@ -2075,22 +1956,18 @@ footer p:first-child {
         letterSlides[i].classList.remove('leaving-next', 'leaving-back', 'entering-next', 'entering-back');
       }
     }
-    // dots
     if (letterDots) {
       var dots = letterDots.querySelectorAll('.dot');
       for (var j = 0; j < dots.length; j++) {
         dots[j].classList.toggle('active', j === currentLetterIndex);
       }
     }
-    // counter
     if (letterCounter) {
       letterCounter.textContent = (currentLetterIndex + 1) + ' / ' + letterTotal;
     }
-    // back button
     if (letterBackBtn) {
       letterBackBtn.style.display = currentLetterIndex === 0 ? 'none' : 'inline-block';
     }
-    // next button text
     if (letterNextBtn) {
       if (currentLetterIndex === letterTotal - 1) {
         letterNextBtn.textContent = 'Continue ❤️';
@@ -2098,13 +1975,8 @@ footer p:first-child {
         letterNextBtn.textContent = 'Next 💌';
       }
     }
-    // ornament only on last slide
     if (letterOrnament) {
       letterOrnament.style.visibility = (currentLetterIndex === letterTotal - 1) ? 'visible' : 'hidden';
-    }
-    // reset stage scroll
-    if (letterStage) {
-      letterStage.scrollTop = 0;
     }
   }
 
@@ -2137,9 +2009,7 @@ footer p:first-child {
   function goToNextLetter() {
     if (isTransitioning) return;
     if (currentLetterIndex >= letterTotal - 1) {
-      // last slide — Continue action
       if (letterOrnament) letterOrnament.style.visibility = 'visible';
-      // smooth scroll to next section
       var nextSection = document.querySelector('.special-friendship');
       if (nextSection) {
         nextSection.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
@@ -2167,7 +2037,6 @@ footer p:first-child {
       currentSlide.classList.remove('leaving-next');
       nextSlide.classList.remove('hidden');
       nextSlide.classList.add('entering-next');
-      // force reflow
       void nextSlide.offsetWidth;
       nextSlide.classList.remove('entering-next');
       currentLetterIndex++;
@@ -2219,7 +2088,6 @@ footer p:first-child {
     if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
     var key = e.key;
     if (key === 'ArrowRight' || key === ' ' || key === 'Spacebar' || key === 'Enter') {
-      // avoid double-trigger if focus is on a button
       if (document.activeElement && document.activeElement.tagName === 'BUTTON') return;
       e.preventDefault();
       goToNextLetter();
@@ -2229,21 +2097,21 @@ footer p:first-child {
     }
   });
 
-  // Swipe support for letter stage
-  if (letterStage) {
+  // Swipe support for letter
+  if (letterEl) {
     var touchStartX = 0;
     var touchStartY = 0;
     var touchMoved = false;
-    letterStage.addEventListener('touchstart', function (e) {
+    letterEl.addEventListener('touchstart', function (e) {
       var t = e.touches[0];
       touchStartX = t.clientX;
       touchStartY = t.clientY;
       touchMoved = false;
     }, { passive: true });
-    letterStage.addEventListener('touchmove', function (e) {
+    letterEl.addEventListener('touchmove', function () {
       touchMoved = true;
     }, { passive: true });
-    letterStage.addEventListener('touchend', function (e) {
+    letterEl.addEventListener('touchend', function (e) {
       if (!touchMoved) return;
       var t = e.changedTouches[0];
       var dx = t.clientX - touchStartX;
@@ -2258,7 +2126,6 @@ footer p:first-child {
     }, { passive: true });
   }
 
-  // Initialize letter reader UI
   if (letterSlides.length) {
     buildLetterDots();
     updateLetterUI();
@@ -2270,11 +2137,9 @@ footer p:first-child {
       proceedToLetter();
       return;
     }
-    // Show envelope overlay
     envelopeOverlay.classList.add('show');
     envelopeOverlay.setAttribute('aria-hidden', 'false');
 
-    // Heart burst from envelope
     setTimeout(function () {
       var env = envelopeOverlay.querySelector('.envelope');
       if (env) {
@@ -2302,7 +2167,6 @@ footer p:first-child {
       }
     }, 300);
 
-    // Confetti + sparkles from envelope
     setTimeout(function () {
       var env = envelopeOverlay.querySelector('.envelope');
       if (env) {
@@ -2311,7 +2175,6 @@ footer p:first-child {
       }
     }, 500);
 
-    // After animation, go to main
     setTimeout(function () {
       envelopeOverlay.classList.remove('show');
       envelopeOverlay.setAttribute('aria-hidden', 'true');
@@ -2371,11 +2234,9 @@ footer p:first-child {
       promiseMessage.textContent = 'Promise Locked Forever! 🔐🎀';
       promiseMessage.classList.add('show');
 
-      // Screen glow
       promiseCard.classList.add('glow');
       setTimeout(function () { promiseCard.classList.remove('glow'); }, 1700);
 
-      // Big confetti + hearts
       var rect = promiseBtn.getBoundingClientRect();
       spawnConfetti(rect.left + rect.width / 2, rect.top, 36);
 
@@ -2409,11 +2270,9 @@ footer p:first-child {
     hugBtn.addEventListener('click', function () {
       hugMessage.textContent = 'A BIG HUG SENT YOUR WAY! 🫂❤️';
       hugMessage.classList.remove('show');
-      // force reflow to restart animation
       void hugMessage.offsetWidth;
       hugMessage.classList.add('show');
 
-      // Animate the hugging characters
       if (hugIllustration) {
         hugIllustration.classList.remove('animated');
         void hugIllustration.offsetWidth;
@@ -2421,7 +2280,6 @@ footer p:first-child {
         setTimeout(function () { hugIllustration.classList.remove('animated'); }, 800);
       }
 
-      // Floating hearts
       var emojis = ['❤️', '🫂', '💗', '🎀', '💖'];
       for (var i = 0; i < 12; i++) {
         (function (idx) {
@@ -2482,7 +2340,6 @@ footer p:first-child {
     }
   }
 
-  // pause petals when tab hidden
   document.addEventListener('visibilitychange', function () {
     if (document.hidden) {
       petalLayer.style.display = 'none';
@@ -2519,11 +2376,10 @@ footer p:first-child {
     }, { passive: true });
   }
 
-  // ===== MEMORY CARDS: tilt on hover + sparkle burst on tap =====
+  // ===== MEMORY CARDS =====
   var cards = document.querySelectorAll('.card');
   cards.forEach(function (card) {
-    card.addEventListener('click', function (e) {
-      // sparkle burst
+    card.addEventListener('click', function () {
       var rect = card.getBoundingClientRect();
       var cx = rect.left + rect.width / 2;
       var cy = rect.top + rect.height / 2;
@@ -2551,7 +2407,6 @@ footer p:first-child {
           }, idx * 40);
         })(i);
       }
-      // tilt
       card.classList.add('tilted');
       setTimeout(function () { card.classList.remove('tilted'); }, 500);
     });
@@ -2564,7 +2419,6 @@ footer p:first-child {
         el.classList.add('in');
       });
     };
-    // hide petals
     if (petalLayer) petalLayer.style.display = 'none';
   }
 

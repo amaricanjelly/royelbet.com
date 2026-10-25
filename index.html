@@ -594,11 +594,12 @@ button .ripple {
   font-style: normal;
 }
 
+/* ===== LETTER TEXT STYLING (NEW) ===== */
 .letter p {
   font-family: var(--serif);
-  font-size: clamp(1.4rem, 3.2vw, 1.75rem);
+  font-size: clamp(1.15rem, 3vw, 1.6rem);
   font-weight: 500;
-  line-height: 1.75;
+  line-height: 1.8;
   margin-bottom: 1.4rem;
   white-space: pre-line;
   color: var(--burg);
@@ -607,6 +608,35 @@ button .ripple {
 }
 
 .letter p:last-child { margin-bottom: 0; }
+
+/* First paragraph: title-like line */
+#letter .letter-title {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.5rem, 4.5vw, 2.1rem);
+  text-align: center;
+  line-height: 1.5;
+  margin-bottom: 1.8rem;
+  color: var(--burg);
+  text-shadow: 0 1px 6px rgba(255, 248, 240, 0.9);
+}
+
+/* Last paragraph: soft gold dashed box like .sign */
+#letter .letter-sign {
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 3vw, 1.6rem);
+  font-weight: 500;
+  line-height: 1.8;
+  text-align: center;
+  background: rgba(255, 248, 240, 0.85);
+  border: 2px dashed var(--gold);
+  border-radius: 12px;
+  padding: 1.5rem 1.3rem;
+  margin-top: 1.6rem;
+  color: var(--burg);
+  text-transform: uppercase;
+  box-shadow: 0 4px 16px rgba(199, 125, 145, 0.12);
+}
 
 /* staggered reveal with blur */
 .rv {
@@ -630,7 +660,6 @@ button .ripple {
 #letter .rv:nth-child(5) { transition-delay: 0.32s; }
 #letter .rv:nth-child(6) { transition-delay: 0.4s; }
 #letter .rv:nth-child(7) { transition-delay: 0.48s; }
-#letter .rv:nth-child(8) { transition-delay: 0.56s; }
 
 .orn {
   text-align: center;
@@ -1133,7 +1162,7 @@ footer p:first-child {
   font-size: clamp(1.1rem, 3vw, 1.3rem);
 }
 
-/* ========== ENVELOPE INTRO (visual only, existing open button triggers it) ========== */
+/* ========== ENVELOPE INTRO (visual only) ========== */
 #envelopeOverlay {
   position: fixed;
   inset: 0;
@@ -1245,12 +1274,14 @@ footer p:first-child {
   .vol-wrap input[type="range"] { width: 44px; }
   #playMusicBtn { bottom: 14px; right: 10px; font-size: 0.85rem; padding: 0.7rem 1.2rem; }
   .music-note { bottom: 74px; right: 10px; font-size: 0.78rem; max-width: 210px; }
+  #letter .letter-title { font-size: clamp(1.3rem, 5vw, 1.6rem); }
+  #letter .letter-sign { padding: 1.2rem 1rem; }
 }
 
 @media (min-width: 1200px) {
   #welcome h1 { font-size: 5rem; }
   #welcome .surprise-text { font-size: 2.2rem; }
-  .letter p { font-size: 1.75rem; }
+  .letter p { font-size: 1.6rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1473,24 +1504,23 @@ footer p:first-child {
     <div class="paper">
       <h2><span class="heading-line">For You 💌</span></h2>
       <div class="letter" id="letter">
-        <!-- ===== COMPLETE ORIGINAL LETTER ===== -->
-        <p class="rv">My dearest Sanam, 🥹🎀</p>
 
-        <p class="rv">Ami ajkal onek vabchi. Tor sathe kotha bolle mone hoy ami choto belar sei paglami gulor moddhe hariye jai. Tui amar life er ekta ongsho, ekta ongsho ja ami kokhono hariye felte chai na. 🫂❤️</p>
+        <!-- ===== NEW LETTER (uppercase via CSS) ===== -->
 
-        <p class="rv">Mone porche sei din gulo, jokhon amra choto chilam, ek sathe koto paglami kortam. Tui chilo amar partner in crime, amar sob kichu. Aj o tui sei rokom achis, sudhu amader jibon ektu bodle geche. 😭🎀</p>
+        <p class="rv letter-title">Amar sister from another mother 🥹❤️🫂</p>
 
-        <p class="rv">Tor sathe kotha bolle mon bhalo hoye jay. Tor hashi dekhe mone hoy sob kichu thik ache. Tui amar jibone ekta alo, ekta asha. Ami chai tui sob somoy khushi thakbi, hashi thakbi. 🥹❤️</p>
+        <p class="rv">tui amar jiboner emon ekjon manush jake ami kokhono harate chai na. Amar kharap somoy theke shuru kore valo somoy porjonto tui sobsomoy amar pashe chilis, amake support korechis, amar sathe haschis, amar sathe moja korechis. Amra dujon mile koto je jawrami korsi, koto moja korsi, koto hasi thatta korsi, eigula mone porle amar mukhe emnitei hashi chole ashe. 🥹🎀</p>
 
-        <p class="rv">Ami jani na ami koto dur jabo, kothay giye thamabo. Kintu ami jani ekta kotha — tui amar sob somoy thakbi. Amader bondhutto kokhono hariye jabe na. 🎀♾️</p>
+        <p class="rv">Tor sathe katano prottekta moment amar kache onek special. Jani na vobisshote amader jibon kothay niye jabe, ke kothay thakbo, kar life e ki poriborton ashbe, but ami mon theke chai tui jeno sobsomoy amar pashe thakis. Amar kharap somoy e jemon pashe chilis, temni amar valo somoy guloteo amar sathe thakis. Ami chai amra evabei dujon mile paglamo korbo, moja korbo, ekjon arekjonke jalaibo ar eksathe hasbo. ❤️🥹</p>
 
-        <p class="rv">Tor jibone joto manush-i ashuk na keno, ami chai amar jonno tor moner ekta chotto jayga sobsomoy thakuk. Ami hoyto perfect na, but tor jonno amar valobasha ar care kokhono kombe na. 🫂❤️</p>
+        <p class="rv">Ar ekta kotha janis, tor biye hoye gele ami kemne thakbo re? 😭💔 Vablei kemon jani lage je ekdin tui onno ekta barite chole jabi, tokhon amar sathe ke eto paglamo korbe, ke amar sathe eto moja korbe, ke amar sob kotha shunbe? Tor biye te ami khushi hobo, karon ami chai tui onek sukhe thakish, kintu toke chara amar onek eka eka lagbe re. 🥺🫶🏻</p>
 
-        <p class="rv">One day, when we grow old, I hope we'll still be laughing at our stupid jokes, remembering our crazy moments and making new memories together. 🌸🥹</p>
+        <p class="rv">Amader ajker ei sundor muhurto gulo ekdin smriti hoye jabe, kintu ami chai na amader somporko kokhono bodle jak. Tui jekhanei thakish, jar sathei thakish, amake kokhono vule jash na. Amar jibone tor jaygata sobsomoy special hoyei thakbe. Hoyto protidin toke boli na, kintu tui amar kache onek beshi important. Tui shudhu amar bon na, tui amar best friend, amar partner in crime, amar sob paglamir songi. 🥹❤️</p>
 
-        <p class="rv">Thank you for being my sister, my best friend and my forever Pookie. 🥹❤️🫂</p>
+        <p class="rv">Ami chai boyosh bere geleo amra jeno evabei eksathe boshe purono diner kotha mone kore hasi, abar notun notun smriti toiri kori. Allah jeno amader ei bondhon ta sara jibon emon sundor rakhen. Tor jibone jotoi poriborton ashuk na keno, amader valobasha ar bondhutto jeno kokhono kome na jay. Ami sobsomoy tor pashe thakte chai, tor sukh-dukkher songi hoye.</p>
 
-        <p class="rv">Oky, promise korlam... kokhono vulbo na toke. 🥹❤️<br>Sorry jodi kokhono toke koshto diye thaki.<br>Always stay beside me, my sister from another mother. 🫂<br>— Your Partner In Crime ❤️</p>
+        <p class="rv letter-sign">Love you so much re amar bon, amar sister from another mother. Tui amar jiboner emon ekta ongsho, jake ami kokhono harate chai na. Sob somoy amar pashe thakis, karon toke chara amar ei paglamir jibon ta onek faka faka lagbe. 🥹❤️🫂🎀♾️</p>
+
       </div>
       <div class="orn">❀ ♡ ❀</div>
     </div>
@@ -1575,14 +1605,9 @@ footer p:first-child {
     </div>
   </section>
 
-  <!-- ===== ENDING SECTION ===== -->
+  <!-- ===== ENDING SECTION (repeated old letter lines removed) ===== -->
   <section class="ending">
-    <p class="lead rv">Ekta Kotha Mone Rakhish...</p>
-    <p class="rv">Tor jibone joto manush-i ashuk na keno, ami chai amar jonno tor moner ekta chotto jayga sobsomoy thakuk. Ami hoyto perfect na, but tor jonno amar valobasha ar care kokhono kombe na.</p>
-    <p class="rv">One day, when we grow old, I hope we'll still be laughing at our stupid jokes, remembering our crazy moments and making new memories together.</p>
-    <p class="rv">Thank you for being my sister, my best friend and my forever Pookie. 🥹❤️🫂</p>
     <div class="big rv">Love You Forever, My Sanam! 🌹🎀♾️</div>
-    <p class="sign rv">Oky, promise korlam... kokhono vulbo na toke. 🥹❤️<br>Sorry jodi kokhono toke koshto diye thaki.<br>Always stay beside me, my sister from another mother. 🫂<br>— Your Partner In Crime ❤️</p>
     <!-- Ending hug illustration -->
     <div class="ending-hug rv" aria-hidden="true">
       <svg viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2131,7 +2156,6 @@ footer p:first-child {
   var petalLayer = document.getElementById('petalLayer');
   var petals = [];
   var PETAL_COUNT = 26;
-  var petalsPaused = false;
 
   function createPetal() {
     var el = document.createElement('div');

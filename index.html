@@ -262,15 +262,16 @@ body::before {
   text-transform: uppercase;
 }
 
-/* golden shimmer on the visitor's name */
+/* golden shimmer on the visitor's name — darker gold so it stays visible */
 #welcomeHeading .shimmer-name {
-  background: linear-gradient(100deg, #C9A96E 0%, #F6E3B4 25%, #C9A96E 50%, #F6E3B4 75%, #C9A96E 100%);
+  background: linear-gradient(100deg, #B8860B 0%, #E8C170 25%, #B8860B 50%, #E8C170 75%, #8B5A2B 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
   animation: goldShimmer 3s linear infinite;
+  font-weight: 700;
 }
 
 @keyframes goldShimmer {
@@ -346,183 +347,6 @@ button .ripple {
   to { transform: scale(4); opacity: 0; }
 }
 
-/* pulsing PLAY MUSIC button */
-#playMusicBtn {
-  position: fixed;
-  bottom: 24px;
-  right: 20px;
-  z-index: 999;
-  display: none;
-  font-size: 0.95rem;
-  padding: 0.8rem 1.6rem;
-  animation: pulseBtn 1.6s ease-in-out infinite;
-}
-
-#playMusicBtn.show {
-  display: inline-block;
-}
-
-@keyframes pulseBtn {
-  0%, 100% { transform: scale(1); box-shadow: 0 10px 30px rgba(113, 59, 77, 0.3), 0 0 0 0 rgba(201, 169, 110, 0.5); }
-  50% { transform: scale(1.06); box-shadow: 0 14px 36px rgba(113, 59, 77, 0.4), 0 0 0 14px rgba(201, 169, 110, 0.0); }
-}
-
-/* small friendly music-not-found message */
-.music-note {
-  position: fixed;
-  bottom: 90px;
-  right: 20px;
-  z-index: 998;
-  background: rgba(255, 248, 240, 0.95);
-  border: 1.5px solid var(--gold);
-  border-radius: 14px;
-  padding: 0.7rem 1.1rem;
-  font-family: var(--cute);
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--burg);
-  max-width: 260px;
-  text-align: left;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  box-shadow: 0 8px 24px rgba(113, 59, 77, 0.2);
-  display: none;
-}
-.music-note.show { display: block; }
-
-/* ========== FLOATING MUSIC PLAYER ========== */
-#musicPlayer {
-  position: fixed;
-  bottom: 22px;
-  left: 18px;
-  z-index: 1000;
-  display: none;
-  align-items: center;
-  gap: 12px;
-  background: rgba(255, 248, 240, 0.92);
-  border: 1.5px solid var(--gold);
-  border-radius: 60px;
-  padding: 8px 16px 8px 8px;
-  box-shadow: 0 10px 30px rgba(113, 59, 77, 0.25);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-#musicPlayer.show {
-  display: flex;
-}
-
-.disc-wrap {
-  position: relative;
-  width: 48px;
-  height: 48px;
-  flex: 0 0 48px;
-}
-
-.disc {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #F8DDE5 0%, #E8709F 35%, #5E2C3A 100%);
-  border: 2px solid var(--gold);
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: box-shadow 0.3s;
-}
-
-.disc::after {
-  content: '';
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--cream);
-  border: 2px solid var(--gold);
-}
-
-#musicPlayer.playing .disc {
-  animation: spinDisc 3.5s linear infinite;
-  box-shadow: 0 0 0 0 rgba(201, 169, 110, 0.6);
-}
-
-#musicPlayer.playing .disc-wrap {
-  animation: pulseDisc 2s ease-in-out infinite;
-}
-
-@keyframes spinDisc {
-  to { transform: rotate(360deg); }
-}
-
-@keyframes pulseDisc {
-  0%, 100% { filter: drop-shadow(0 0 0 rgba(232, 112, 159, 0)); }
-  50% { filter: drop-shadow(0 0 10px rgba(232, 112, 159, 0.8)); }
-}
-
-.eq {
-  display: flex;
-  align-items: flex-end;
-  gap: 2.5px;
-  height: 26px;
-}
-
-.eq span {
-  display: block;
-  width: 3.5px;
-  background: linear-gradient(180deg, var(--bract), var(--burg));
-  border-radius: 2px;
-  height: 30%;
-  transition: height 0.25s ease;
-}
-
-#musicPlayer.playing .eq span {
-  animation: eqBounce 0.9s ease-in-out infinite;
-}
-#musicPlayer.playing .eq span:nth-child(2) { animation-delay: 0.12s; }
-#musicPlayer.playing .eq span:nth-child(3) { animation-delay: 0.24s; }
-#musicPlayer.playing .eq span:nth-child(4) { animation-delay: 0.36s; }
-
-@keyframes eqBounce {
-  0%, 100% { height: 25%; }
-  50% { height: 95%; }
-}
-
-.player-btn {
-  font-family: var(--cute);
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--cream);
-  background: var(--burg);
-  border: 1.5px solid var(--gold);
-  border-radius: 50%;
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: none;
-  flex: 0 0 34px;
-}
-
-.player-btn:hover, .player-btn:focus-visible {
-  transform: scale(1.08);
-  box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.35);
-}
-
-.vol-wrap {
-  display: flex;
-  align-items: center;
-}
-
-.vol-wrap input[type="range"] {
-  width: 60px;
-  accent-color: var(--rose);
-  cursor: pointer;
-  height: 4px;
-}
-
 /* ========== MAIN CONTENT ========== */
 #main {
   display: none;
@@ -594,7 +418,7 @@ button .ripple {
   font-style: normal;
 }
 
-/* ===== LETTER TEXT STYLING (NEW) ===== */
+/* ===== LETTER TEXT STYLING ===== */
 .letter p {
   font-family: var(--serif);
   font-size: clamp(1.15rem, 3vw, 1.6rem);
@@ -1270,10 +1094,6 @@ footer p:first-child {
   .hug-illustration svg { width: 110px; }
   .ending-hug svg { width: 120px; }
   .float-decor { display: none; }
-  #musicPlayer { bottom: 14px; left: 10px; padding: 6px 12px 6px 6px; gap: 8px; }
-  .vol-wrap input[type="range"] { width: 44px; }
-  #playMusicBtn { bottom: 14px; right: 10px; font-size: 0.85rem; padding: 0.7rem 1.2rem; }
-  .music-note { bottom: 74px; right: 10px; font-size: 0.78rem; max-width: 210px; }
   #letter .letter-title { font-size: clamp(1.3rem, 5vw, 1.6rem); }
   #letter .letter-sign { padding: 1.2rem 1rem; }
 }
@@ -1505,8 +1325,6 @@ footer p:first-child {
       <h2><span class="heading-line">For You 💌</span></h2>
       <div class="letter" id="letter">
 
-        <!-- ===== NEW LETTER (uppercase via CSS) ===== -->
-
         <p class="rv letter-title">Amar sister from another mother 🥹❤️🫂</p>
 
         <p class="rv">tui amar jiboner emon ekjon manush jake ami kokhono harate chai na. Amar kharap somoy theke shuru kore valo somoy porjonto tui sobsomoy amar pashe chilis, amake support korechis, amar sathe haschis, amar sathe moja korechis. Amra dujon mile koto je jawrami korsi, koto moja korsi, koto hasi thatta korsi, eigula mone porle amar mukhe emnitei hashi chole ashe. 🥹🎀</p>
@@ -1605,7 +1423,7 @@ footer p:first-child {
     </div>
   </section>
 
-  <!-- ===== ENDING SECTION (repeated old letter lines removed) ===== -->
+  <!-- ===== ENDING SECTION ===== -->
   <section class="ending">
     <div class="big rv">Love You Forever, My Sanam! 🌹🎀♾️</div>
     <!-- Ending hug illustration -->
@@ -1649,33 +1467,6 @@ footer p:first-child {
   </footer>
 </div>
 
-<!-- ========== MUSIC PLAYER ========== -->
-<!--
-  ═══════════════════════════════════════════════════════════════
-  MUSIC FILE: place your mp3 in the SAME FOLDER as this index.html
-  PRIMARY:  "sanam-re.mp3"
-  FALLBACK: "SANAM RE Title Song FULL VIDEO _ Pulkit Sam....mp3"
-            "SANAM RE Title Song FULL VIDEO _ Pulkit Sam....mp4"
-  ─ If your actual file name is different, change the strings in
-    MUSIC_SOURCES below (keep URL encoding for spaces).
-  ═══════════════════════════════════════════════════════════════
--->
-<div id="musicPlayer">
-  <div class="disc-wrap">
-    <div class="disc"></div>
-  </div>
-  <div class="eq">
-    <span></span><span></span><span></span><span></span>
-  </div>
-  <button id="musicToggleBtn" class="player-btn" type="button" aria-label="Pause music">❚❚</button>
-  <div class="vol-wrap">
-    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.4" aria-label="Volume">
-  </div>
-</div>
-
-<button id="playMusicBtn" type="button">▶ PLAY MUSIC</button>
-<div class="music-note" id="musicNote">Music file not found — but the love is still playing in our hearts. 💗</div>
-
 <script>
 (function () {
   'use strict';
@@ -1700,43 +1491,22 @@ footer p:first-child {
   var hugMessage = document.getElementById('hugMessage');
   var hugIllustration = document.getElementById('hugIllustration');
 
-  // ===== AUDIO ELEMENTS =====
-  // ↓↓↓ CHANGE YOUR MUSIC FILENAMES HERE IF NEEDED ↓↓↓
-  var MUSIC_SOURCES = [
-    'sanam-re.mp3',
-    'SANAM%20RE%20Title%20Song%20FULL%20VIDEO%20_%20Pulkit%20Sam....mp3',
-    'SANAM%20RE%20Title%20Song%20FULL%20VIDEO%20_%20Pulkit%20Sam....mp4'
-  ];
-  var audio = new Audio();
-  audio.loop = true;
-  audio.volume = 0;
-  audio.preload = 'auto';
-
-  var musicPlayer = document.getElementById('musicPlayer');
-  var musicToggleBtn = document.getElementById('musicToggleBtn');
-  var volumeSlider = document.getElementById('volumeSlider');
-  var playMusicBtn = document.getElementById('playMusicBtn');
-  var musicNote = document.getElementById('musicNote');
-
-  var currentSourceIndex = 0;
-  var musicStarted = false;
-  var targetVolume = 0.4;
-  var fadeTimer = null;
-
   // ===== STATE =====
   var visitorName = '';
 
   // ===== LETTER-BY-LETTER FADE-IN FOR NAME HEADING =====
+  // Uses Array.from so emojis stay whole and never render as empty boxes.
   (function animateNameHeading() {
     if (!nameHeading) return;
     var text = nameHeading.textContent;
     nameHeading.textContent = '';
     nameHeading.setAttribute('aria-label', text);
     var frag = document.createDocumentFragment();
-    for (var i = 0; i < text.length; i++) {
+    var chars = Array.from(text);
+    for (var i = 0; i < chars.length; i++) {
       var span = document.createElement('span');
       span.className = 'letter';
-      span.textContent = text[i];
+      span.textContent = chars[i];
       span.style.animationDelay = (i * 0.045) + 's';
       frag.appendChild(span);
     }
@@ -1758,123 +1528,6 @@ footer p:first-child {
     setTimeout(function () { ripple.remove(); }, 700);
   });
 
-  // ===== MUSIC ENGINE =====
-  function tryNextSource() {
-    currentSourceIndex++;
-    if (currentSourceIndex < MUSIC_SOURCES.length) {
-      audio.src = MUSIC_SOURCES[currentSourceIndex];
-      audio.load();
-      attemptPlay();
-    } else {
-      // all failed
-      showMusicFallback();
-    }
-  }
-
-  function attemptPlay() {
-    var playPromise = audio.play();
-    if (playPromise !== undefined) {
-      playPromise.then(function () {
-        musicStarted = true;
-        fadeInMusic();
-        musicPlayer.classList.add('show', 'playing');
-        musicToggleBtn.textContent = '❚❚';
-        playMusicBtn.classList.remove('show');
-        musicNote.classList.remove('show');
-      }).catch(function () {
-        // autoplay blocked or file failed — try next source
-        if (audio.error) {
-          tryNextSource();
-        } else {
-          // blocked by browser — show play button
-          musicPlayer.classList.add('show');
-          musicPlayer.classList.remove('playing');
-          playMusicBtn.classList.add('show');
-          musicToggleBtn.textContent = '▶';
-        }
-      });
-    }
-  }
-
-  function fadeInMusic() {
-    if (fadeTimer) clearInterval(fadeTimer);
-    audio.volume = 0;
-    var steps = 30; // ~3s at 100ms
-    var step = 0;
-    fadeTimer = setInterval(function () {
-      step++;
-      var v = (targetVolume) * (step / steps);
-      audio.volume = Math.min(v, targetVolume);
-      if (step >= steps) {
-        clearInterval(fadeTimer);
-        fadeTimer = null;
-        audio.volume = targetVolume;
-      }
-    }, 100);
-  }
-
-  function startMusicFromGesture() {
-    // This MUST be called directly from a user gesture (click/keydown)
-    audio.src = MUSIC_SOURCES[0];
-    audio.load();
-    currentSourceIndex = 0;
-    attemptPlay();
-  }
-
-  function showMusicFallback() {
-    musicPlayer.classList.remove('show', 'playing');
-    playMusicBtn.classList.add('show');
-    musicNote.classList.add('show');
-    musicToggleBtn.textContent = '▶';
-    setTimeout(function () {
-      musicNote.classList.remove('show');
-    }, 6000);
-  }
-
-  // Play button (if autoplay blocked or file missing)
-  playMusicBtn.addEventListener('click', function () {
-    if (musicStarted && audio.paused) {
-      audio.play().then(function () {
-        musicPlayer.classList.add('playing');
-        musicToggleBtn.textContent = '❚❚';
-        playMusicBtn.classList.remove('show');
-      }).catch(function () {});
-    } else {
-      currentSourceIndex = 0;
-      audio.src = MUSIC_SOURCES[0];
-      audio.load();
-      attemptPlay();
-    }
-  });
-
-  // Toggle play/pause
-  musicToggleBtn.addEventListener('click', function () {
-    if (audio.paused) {
-      audio.play().then(function () {
-        musicPlayer.classList.add('playing');
-        musicToggleBtn.textContent = '❚❚';
-      }).catch(function () {});
-    } else {
-      audio.pause();
-      musicPlayer.classList.remove('playing');
-      musicToggleBtn.textContent = '▶';
-    }
-  });
-
-  // Volume slider
-  volumeSlider.addEventListener('input', function () {
-    targetVolume = parseFloat(volumeSlider.value);
-    if (fadeTimer) { clearInterval(fadeTimer); fadeTimer = null; }
-    audio.volume = targetVolume;
-  });
-
-  // Handle audio errors during playback
-  audio.addEventListener('error', function () {
-    if (!musicStarted) {
-      tryNextSource();
-    }
-  });
-
   // ===== NAME SUBMISSION =====
   function submitName() {
     var raw = visitorNameInput.value.trim();
@@ -1887,9 +1540,6 @@ footer p:first-child {
     visitorName = raw.replace(/[<>]/g, '');
     nameError.classList.remove('show');
     nameError.textContent = '';
-
-    // ═══ START MUSIC DIRECTLY IN THIS USER GESTURE ═══
-    startMusicFromGesture();
 
     // Personalize welcome heading with shimmer span
     welcomeHeading.innerHTML = 'Hello, <span class="shimmer-name">' +
@@ -1935,10 +1585,11 @@ footer p:first-child {
     var cursor = document.createElement('span');
     cursor.className = 'cursor-blink';
     welcomeSubtitle.appendChild(cursor);
+    var chars = Array.from(text);
     var i = 0;
     function type() {
-      if (i < text.length) {
-        welcomeSubtitle.insertBefore(document.createTextNode(text[i]), cursor);
+      if (i < chars.length) {
+        welcomeSubtitle.insertBefore(document.createTextNode(chars[i]), cursor);
         i++;
         setTimeout(type, 38);
       } else {

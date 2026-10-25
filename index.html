@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>My ffhhf 🎀</title>
+<title>My  🎀</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
@@ -1079,6 +1079,250 @@ footer p:first-child {
   100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.3); opacity: 0; }
 }
 
+/* ========== MUSIC BUTTON ========== */
+#musicToggle {
+  position: fixed;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  right: 18px;
+  z-index: 99999;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: linear-gradient(135deg, var(--rose) 0%, var(--burg) 100%);
+  color: var(--cream);
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(113, 59, 77, 0.35), 0 2px 8px rgba(201, 169, 110, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  padding: 0;
+  line-height: 1;
+}
+
+#musicToggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 30px rgba(113, 59, 77, 0.45), 0 4px 12px rgba(201, 169, 110, 0.4);
+}
+
+#musicToggle:active {
+  transform: scale(0.95);
+}
+
+/* fallback play button */
+#musicFallback {
+  position: fixed;
+  bottom: max(90px, calc(env(safe-area-inset-bottom) + 70px));
+  right: 18px;
+  z-index: 99999;
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+#musicFallback.show {
+  display: flex;
+}
+
+#musicFallback button {
+  font-size: 0.9rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 40px;
+  animation: pulseFallback 1.6s ease-in-out infinite;
+  white-space: nowrap;
+}
+
+@keyframes pulseFallback {
+  0%, 100% { box-shadow: 0 8px 24px rgba(113, 59, 77, 0.35), 0 0 0 0 rgba(201, 169, 110, 0.5); }
+  50% { box-shadow: 0 8px 24px rgba(113, 59, 77, 0.35), 0 0 0 10px rgba(201, 169, 110, 0.1); }
+}
+
+#musicFallbackMsg {
+  font-family: var(--cute);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #B8306B;
+  background: rgba(255, 248, 240, 0.95);
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  border: 1px solid var(--gold);
+  display: none;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  max-width: 210px;
+  text-align: right;
+  line-height: 1.3;
+}
+
+#musicFallbackMsg.show {
+  display: block;
+}
+
+/* ========== LETTER READER (ONE PARAGRAPH AT A TIME) ========== */
+#letter {
+  position: relative;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#letter .letter-stage {
+  position: relative;
+  width: 100%;
+  max-height: 42vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.2rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rose) var(--blush);
+}
+
+#letter .letter-stage::-webkit-scrollbar {
+  width: 6px;
+}
+#letter .letter-stage::-webkit-scrollbar-track {
+  background: transparent;
+}
+#letter .letter-stage::-webkit-scrollbar-thumb {
+  background: var(--rose);
+  border-radius: 6px;
+}
+
+#letter .letter-slide {
+  width: 100%;
+  margin: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
+  will-change: opacity, transform, filter;
+}
+
+#letter .letter-slide.hidden {
+  display: none;
+}
+
+#letter .letter-slide.leaving-next {
+  opacity: 0;
+  transform: translateY(-18px);
+  filter: blur(4px);
+}
+
+#letter .letter-slide.leaving-back {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(4px);
+}
+
+#letter .letter-slide.entering-next {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(4px);
+}
+
+#letter .letter-slide.entering-back {
+  opacity: 0;
+  transform: translateY(-18px);
+  filter: blur(4px);
+}
+
+/* reduced motion: simple fade only */
+@media (prefers-reduced-motion: reduce) {
+  #letter .letter-slide {
+    transition: opacity 0.2s ease;
+  }
+  #letter .letter-slide.leaving-next,
+  #letter .letter-slide.leaving-back,
+  #letter .letter-slide.entering-next,
+  #letter .letter-slide.entering-back {
+    transform: none;
+    filter: none;
+  }
+}
+
+#letter .letter-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1.6rem;
+  flex-wrap: wrap;
+}
+
+#letter .letter-controls button {
+  font-size: clamp(0.95rem, 2.8vw, 1.1rem);
+  padding: 0.75rem 1.7rem;
+  border-radius: 50px;
+}
+
+#letter .letter-controls button:disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+#letter .backBtn {
+  background: linear-gradient(135deg, rgba(199, 125, 145, 0.55) 0%, rgba(94, 44, 58, 0.75) 100%);
+  font-size: clamp(0.85rem, 2.4vw, 1rem);
+  padding: 0.6rem 1.3rem;
+}
+
+#letter .progress-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+#letter .progress-dots .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(199, 125, 145, 0.35);
+  border: 1px solid rgba(201, 169, 110, 0.4);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+#letter .progress-dots .dot.active {
+  background: var(--gold);
+  transform: scale(1.3);
+  box-shadow: 0 0 8px rgba(201, 169, 110, 0.6);
+}
+
+#letter .letter-counter {
+  font-family: var(--cute);
+  font-size: clamp(0.8rem, 2.4vw, 0.95rem);
+  font-weight: 700;
+  color: var(--rose);
+  text-align: center;
+  margin-top: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* heart burst on next */
+.heart-burst-next {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  font-size: 1.2rem;
+  animation: heartBurstNext 0.8s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes heartBurstNext {
+  0% { opacity: 1; transform: translate(0, 0) scale(0.5); }
+  100% { opacity: 0; transform: translate(var(--bx), var(--by)) scale(1.2); }
+}
+
 /* ========== RESPONSIVE ========== */
 @media (max-width: 480px) {
   .katgolap-corner.tl { width: 220px; height: 220px; top: -40px; left: -40px; }
@@ -1096,6 +1340,9 @@ footer p:first-child {
   .float-decor { display: none; }
   #letter .letter-title { font-size: clamp(1.3rem, 5vw, 1.6rem); }
   #letter .letter-sign { padding: 1.2rem 1rem; }
+  #letter .letter-stage { max-height: 38vh; }
+  #musicToggle { width: 48px; height: 48px; font-size: 1.25rem; bottom: max(14px, env(safe-area-inset-bottom)); right: 14px; }
+  #musicFallback { right: 14px; bottom: max(80px, calc(env(safe-area-inset-bottom) + 60px)); }
 }
 
 @media (min-width: 1200px) {
@@ -1325,22 +1572,32 @@ footer p:first-child {
       <h2><span class="heading-line">For You 💌</span></h2>
       <div class="letter" id="letter">
 
-        <p class="rv letter-title">Amar sister from another mother 🥹❤️🫂</p>
+        <div class="letter-stage">
+          <p class="letter-slide letter-title" data-index="0">Amar sister from another mother 🥹❤️🫂</p>
 
-        <p class="rv">tui amar jiboner emon ekjon manush jake ami kokhono harate chai na. Amar kharap somoy theke shuru kore valo somoy porjonto tui sobsomoy amar pashe chilis, amake support korechis, amar sathe haschis, amar sathe moja korechis. Amra dujon mile koto je jawrami korsi, koto moja korsi, koto hasi thatta korsi, eigula mone porle amar mukhe emnitei hashi chole ashe. 🥹🎀</p>
+          <p class="letter-slide" data-index="1">tui amar jiboner emon ekjon manush jake ami kokhono harate chai na. Amar kharap somoy theke shuru kore valo somoy porjonto tui sobsomoy amar pashe chilis, amake support korechis, amar sathe haschis, amar sathe moja korechis. Amra dujon mile koto je jawrami korsi, koto moja korsi, koto hasi thatta korsi, eigula mone porle amar mukhe emnitei hashi chole ashe. 🥹🎀</p>
 
-        <p class="rv">Tor sathe katano prottekta moment amar kache onek special. Jani na vobisshote amader jibon kothay niye jabe, ke kothay thakbo, kar life e ki poriborton ashbe, but ami mon theke chai tui jeno sobsomoy amar pashe thakis. Amar kharap somoy e jemon pashe chilis, temni amar valo somoy guloteo amar sathe thakis. Ami chai amra evabei dujon mile paglamo korbo, moja korbo, ekjon arekjonke jalaibo ar eksathe hasbo. ❤️🥹</p>
+          <p class="letter-slide" data-index="2">Tor sathe katano prottekta moment amar kache onek special. Jani na vobisshote amader jibon kothay niye jabe, ke kothay thakbo, kar life e ki poriborton ashbe, but ami mon theke chai tui jeno sobsomoy amar pashe thakis. Amar kharap somoy e jemon pashe chilis, temni amar valo somoy guloteo amar sathe thakis. Ami chai amra evabei dujon mile paglamo korbo, moja korbo, ekjon arekjonke jalaibo ar eksathe hasbo. ❤️🥹</p>
 
-        <p class="rv">Ar ekta kotha janis, tor biye hoye gele ami kemne thakbo re? 😭💔 Vablei kemon jani lage je ekdin tui onno ekta barite chole jabi, tokhon amar sathe ke eto paglamo korbe, ke amar sathe eto moja korbe, ke amar sob kotha shunbe? Tor biye te ami khushi hobo, karon ami chai tui onek sukhe thakish, kintu toke chara amar onek eka eka lagbe re. 🥺🫶🏻</p>
+          <p class="letter-slide" data-index="3">Ar ekta kotha janis, tor biye hoye gele ami kemne thakbo re? 😭💔 Vablei kemon jani lage je ekdin tui onno ekta barite chole jabi, tokhon amar sathe ke eto paglamo korbe, ke amar sathe eto moja korbe, ke amar sob kotha shunbe? Tor biye te ami khushi hobo, karon ami chai tui onek sukhe thakish, kintu toke chara amar onek eka eka lagbe re. 🥺🫶🏻</p>
 
-        <p class="rv">Amader ajker ei sundor muhurto gulo ekdin smriti hoye jabe, kintu ami chai na amader somporko kokhono bodle jak. Tui jekhanei thakish, jar sathei thakish, amake kokhono vule jash na. Amar jibone tor jaygata sobsomoy special hoyei thakbe. Hoyto protidin toke boli na, kintu tui amar kache onek beshi important. Tui shudhu amar bon na, tui amar best friend, amar partner in crime, amar sob paglamir songi. 🥹❤️</p>
+          <p class="letter-slide" data-index="4">Amader ajker ei sundor muhurto gulo ekdin smriti hoye jabe, kintu ami chai na amader somporko kokhono bodle jak. Tui jekhanei thakish, jar sathei thakish, amake kokhono vule jash na. Amar jibone tor jaygata sobsomoy special hoyei thakbe. Hoyto protidin toke boli na, kintu tui amar kache onek beshi important. Tui shudhu amar bon na, tui amar best friend, amar partner in crime, amar sob paglamir songi. 🥹❤️</p>
 
-        <p class="rv">Ami chai boyosh bere geleo amra jeno evabei eksathe boshe purono diner kotha mone kore hasi, abar notun notun smriti toiri kori. Allah jeno amader ei bondhon ta sara jibon emon sundor rakhen. Tor jibone jotoi poriborton ashuk na keno, amader valobasha ar bondhutto jeno kokhono kome na jay. Ami sobsomoy tor pashe thakte chai, tor sukh-dukkher songi hoye.</p>
+          <p class="letter-slide" data-index="5">Ami chai boyosh bere geleo amra jeno evabei eksathe boshe purono diner kotha mone kore hasi, abar notun notun smriti toiri kori. Allah jeno amader ei bondhon ta sara jibon emon sundor rakhen. Tor jibone jotoi poriborton ashuk na keno, amader valobasha ar bondhutto jeno kokhono kome na jay. Ami sobsomoy tor pashe thakte chai, tor sukh-dukkher songi hoye.</p>
 
-        <p class="rv letter-sign">Love you so much re amar bon, amar sister from another mother. Tui amar jiboner emon ekta ongsho, jake ami kokhono harate chai na. Sob somoy amar pashe thakis, karon toke chara amar ei paglamir jibon ta onek faka faka lagbe. 🥹❤️🫂🎀♾️</p>
+          <p class="letter-slide letter-sign" data-index="6">Love you so much re amar bon, amar sister from another mother. Tui amar jiboner emon ekta ongsho, jake ami kokhono harate chai na. Sob somoy amar pashe thakis, karon toke chara amar ei paglamir jibon ta onek faka faka lagbe. 🥹❤️🫂🎀♾️</p>
+        </div>
+
+        <div class="letter-controls">
+          <button id="letterBackBtn" class="backBtn" type="button" style="display:none;">← Back</button>
+          <button id="letterNextBtn" type="button">Next 💌</button>
+        </div>
+
+        <div class="progress-dots" id="letterDots"></div>
+        <div class="letter-counter" id="letterCounter">1 / 7</div>
 
       </div>
-      <div class="orn">❀ ♡ ❀</div>
+      <div class="orn" id="letterOrnament" style="visibility:hidden;">❀ ♡ ❀</div>
     </div>
   </section>
 
@@ -1467,9 +1724,21 @@ footer p:first-child {
   </footer>
 </div>
 
+<!-- ========== MUSIC TOGGLE BUTTON (floating) ========== -->
+<button id="musicToggle" type="button" aria-label="Toggle music">🔊</button>
+
+<!-- ========== MUSIC FALLBACK ========== -->
+<div id="musicFallback">
+  <button id="musicFallbackBtn" type="button">▶ PLAY MUSIC 🎵</button>
+  <div id="musicFallbackMsg">Song file not found — please check the filename 🎵</div>
+</div>
+
 <script>
 (function () {
   'use strict';
+
+  // CHANGE MUSIC FILENAME HERE
+  var MUSIC_FILE = "SANAM RE Title Song FULL VIDEO _ Pulkit Samrat, Yami Gautam, Urvashi Rautela _ Divya Khosla Kumar.mp3";
 
   // ===== ELEMENT REFERENCES =====
   var nameScreen = document.getElementById('name-screen');
@@ -1491,11 +1760,167 @@ footer p:first-child {
   var hugMessage = document.getElementById('hugMessage');
   var hugIllustration = document.getElementById('hugIllustration');
 
+  // Letter reader elements
+  var letterEl = document.getElementById('letter');
+  var letterStage = letterEl ? letterEl.querySelector('.letter-stage') : null;
+  var letterNextBtn = document.getElementById('letterNextBtn');
+  var letterBackBtn = document.getElementById('letterBackBtn');
+  var letterDots = document.getElementById('letterDots');
+  var letterCounter = document.getElementById('letterCounter');
+  var letterOrnament = document.getElementById('letterOrnament');
+  var letterSlides = letterEl ? Array.prototype.slice.call(letterEl.querySelectorAll('.letter-slide')) : [];
+
+  // Music elements
+  var musicToggle = document.getElementById('musicToggle');
+  var musicFallback = document.getElementById('musicFallback');
+  var musicFallbackBtn = document.getElementById('musicFallbackBtn');
+  var musicFallbackMsg = document.getElementById('musicFallbackMsg');
+
   // ===== STATE =====
   var visitorName = '';
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ===== MUSIC SYSTEM =====
+  var audio = null;
+  var musicStarted = false;
+  var musicMuted = false;
+  var musicFadeTimer = null;
+  var targetVolume = 0.4;
+
+  function buildAudio() {
+    if (audio) return;
+    try {
+      audio = new Audio(encodeURI(MUSIC_FILE));
+      audio.loop = true;
+      audio.volume = 0;
+      audio.preload = 'auto';
+      audio.addEventListener('error', function () {
+        // file failed to load
+        showMusicFallback(true);
+      });
+    } catch (e) {
+      showMusicFallback(true);
+    }
+  }
+
+  function fadeInMusic() {
+    if (!audio) return;
+    if (musicFadeTimer) clearInterval(musicFadeTimer);
+    var start = Date.now();
+    var duration = 2000;
+    audio.volume = 0;
+    musicFadeTimer = setInterval(function () {
+      var elapsed = Date.now() - start;
+      var t = Math.min(elapsed / duration, 1);
+      // ease out
+      var vol = targetVolume * (1 - Math.pow(1 - t, 2));
+      audio.volume = Math.min(vol, targetVolume);
+      if (t >= 1) {
+        clearInterval(musicFadeTimer);
+        musicFadeTimer = null;
+        audio.volume = targetVolume;
+      }
+    }, 50);
+  }
+
+  function startMusicDirectly() {
+    // MUST be called directly inside a user gesture handler
+    buildAudio();
+    if (!audio) return;
+    try {
+      var playPromise = audio.play();
+      if (playPromise && typeof playPromise.then === 'function') {
+        playPromise.then(function () {
+          musicStarted = true;
+          musicMuted = false;
+          musicToggle.textContent = '🔊';
+          musicToggle.setAttribute('aria-label', 'Mute music');
+          fadeInMusic();
+          hideMusicFallback();
+        }).catch(function () {
+          // blocked
+          showMusicFallback(true);
+        });
+      } else {
+        musicStarted = true;
+        musicMuted = false;
+        musicToggle.textContent = '🔊';
+        musicToggle.setAttribute('aria-label', 'Mute music');
+        fadeInMusic();
+      }
+    } catch (e) {
+      showMusicFallback(true);
+    }
+  }
+
+  function showMusicFallback(show) {
+    if (!musicFallback) return;
+    if (show) {
+      musicFallback.classList.add('show');
+    } else {
+      musicFallback.classList.remove('show');
+      musicFallbackMsg.classList.remove('show');
+    }
+  }
+
+  function hideMusicFallback() {
+    if (!musicFallback) return;
+    musicFallback.classList.remove('show');
+    musicFallbackMsg.classList.remove('show');
+  }
+
+  function toggleMute() {
+    if (!audio) return;
+    if (!musicStarted) {
+      // try to start
+      startMusicDirectly();
+      return;
+    }
+    if (musicMuted) {
+      audio.muted = false;
+      audio.volume = targetVolume;
+      musicMuted = false;
+      musicToggle.textContent = '🔊';
+      musicToggle.setAttribute('aria-label', 'Mute music');
+    } else {
+      audio.muted = true;
+      musicMuted = true;
+      musicToggle.textContent = '🔇';
+      musicToggle.setAttribute('aria-label', 'Unmute music');
+    }
+  }
+
+  if (musicToggle) {
+    musicToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      toggleMute();
+    });
+  }
+
+  if (musicFallbackBtn) {
+    musicFallbackBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      startMusicDirectly();
+    });
+  }
+
+  // Pause music when tab hidden, resume when visible
+  document.addEventListener('visibilitychange', function () {
+    if (!audio) return;
+    if (document.hidden) {
+      if (!audio.paused) {
+        audio.pause();
+        audio.dataset.wasPlaying = '1';
+      }
+    } else {
+      if (audio.dataset.wasPlaying === '1' && musicStarted) {
+        audio.play().catch(function () {});
+        delete audio.dataset.wasPlaying;
+      }
+    }
+  });
 
   // ===== LETTER-BY-LETTER FADE-IN FOR NAME HEADING =====
-  // Uses Array.from so emojis stay whole and never render as empty boxes.
   (function animateNameHeading() {
     if (!nameHeading) return;
     var text = nameHeading.textContent;
@@ -1559,12 +1984,18 @@ footer p:first-child {
   }
 
   if (nameSubmitBtn) {
-    nameSubmitBtn.addEventListener('click', submitName);
+    nameSubmitBtn.addEventListener('click', function () {
+      // start music FIRST — directly inside the click handler
+      startMusicDirectly();
+      submitName();
+    });
   }
   if (visitorNameInput) {
     visitorNameInput.addEventListener('keydown', function (e) {
       if (e.key === 'Enter') {
         e.preventDefault();
+        // start music FIRST — directly inside the keydown handler
+        startMusicDirectly();
         submitName();
       }
     });
@@ -1617,9 +2048,223 @@ footer p:first-child {
     }
   }
 
-  // ===== OPEN LETTER WITH ENVELOPE ANIMATION =====
-  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // ===== LETTER READER LOGIC =====
+  var currentLetterIndex = 0;
+  var letterTotal = letterSlides.length;
+  var isTransitioning = false;
 
+  function buildLetterDots() {
+    if (!letterDots) return;
+    letterDots.innerHTML = '';
+    for (var i = 0; i < letterTotal; i++) {
+      var dot = document.createElement('span');
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-hidden', 'true');
+      letterDots.appendChild(dot);
+    }
+  }
+
+  function updateLetterUI() {
+    // slides visibility
+    for (var i = 0; i < letterTotal; i++) {
+      if (i === currentLetterIndex) {
+        letterSlides[i].classList.remove('hidden');
+        letterSlides[i].classList.remove('leaving-next', 'leaving-back', 'entering-next', 'entering-back');
+      } else {
+        letterSlides[i].classList.add('hidden');
+        letterSlides[i].classList.remove('leaving-next', 'leaving-back', 'entering-next', 'entering-back');
+      }
+    }
+    // dots
+    if (letterDots) {
+      var dots = letterDots.querySelectorAll('.dot');
+      for (var j = 0; j < dots.length; j++) {
+        dots[j].classList.toggle('active', j === currentLetterIndex);
+      }
+    }
+    // counter
+    if (letterCounter) {
+      letterCounter.textContent = (currentLetterIndex + 1) + ' / ' + letterTotal;
+    }
+    // back button
+    if (letterBackBtn) {
+      letterBackBtn.style.display = currentLetterIndex === 0 ? 'none' : 'inline-block';
+    }
+    // next button text
+    if (letterNextBtn) {
+      if (currentLetterIndex === letterTotal - 1) {
+        letterNextBtn.textContent = 'Continue ❤️';
+      } else {
+        letterNextBtn.textContent = 'Next 💌';
+      }
+    }
+    // ornament only on last slide
+    if (letterOrnament) {
+      letterOrnament.style.visibility = (currentLetterIndex === letterTotal - 1) ? 'visible' : 'hidden';
+    }
+    // reset stage scroll
+    if (letterStage) {
+      letterStage.scrollTop = 0;
+    }
+  }
+
+  function heartBurstNext(targetEl) {
+    if (prefersReduced) return;
+    var rect = targetEl ? targetEl.getBoundingClientRect() : { left: window.innerWidth / 2, top: window.innerHeight / 2, width: 0, height: 0 };
+    var cx = rect.left + rect.width / 2;
+    var cy = rect.top + rect.height / 2;
+    var emojis = ['❤️', '💖', '🎀', '💗', '✨'];
+    for (var i = 0; i < 8; i++) {
+      (function (idx) {
+        setTimeout(function () {
+          var el = document.createElement('span');
+          el.className = 'heart-burst-next';
+          el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+          el.style.left = cx + 'px';
+          el.style.top = cy + 'px';
+          var ang = Math.random() * Math.PI * 2;
+          var dist = 40 + Math.random() * 80;
+          el.style.setProperty('--bx', (Math.cos(ang) * dist) + 'px');
+          el.style.setProperty('--by', (Math.sin(ang) * dist - 30) + 'px');
+          el.style.fontSize = (14 + Math.random() * 14) + 'px';
+          document.body.appendChild(el);
+          setTimeout(function () { el.remove(); }, 900);
+        }, idx * 50);
+      })(i);
+    }
+  }
+
+  function goToNextLetter() {
+    if (isTransitioning) return;
+    if (currentLetterIndex >= letterTotal - 1) {
+      // last slide — Continue action
+      if (letterOrnament) letterOrnament.style.visibility = 'visible';
+      // smooth scroll to next section
+      var nextSection = document.querySelector('.special-friendship');
+      if (nextSection) {
+        nextSection.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
+      }
+      return;
+    }
+    isTransitioning = true;
+    var currentSlide = letterSlides[currentLetterIndex];
+    var nextSlide = letterSlides[currentLetterIndex + 1];
+
+    heartBurstNext(letterNextBtn);
+
+    if (prefersReduced) {
+      currentSlide.classList.add('hidden');
+      nextSlide.classList.remove('hidden');
+      currentLetterIndex++;
+      updateLetterUI();
+      isTransitioning = false;
+      return;
+    }
+
+    currentSlide.classList.add('leaving-next');
+    setTimeout(function () {
+      currentSlide.classList.add('hidden');
+      currentSlide.classList.remove('leaving-next');
+      nextSlide.classList.remove('hidden');
+      nextSlide.classList.add('entering-next');
+      // force reflow
+      void nextSlide.offsetWidth;
+      nextSlide.classList.remove('entering-next');
+      currentLetterIndex++;
+      updateLetterUI();
+      setTimeout(function () { isTransitioning = false; }, 400);
+    }, 380);
+  }
+
+  function goToPrevLetter() {
+    if (isTransitioning) return;
+    if (currentLetterIndex <= 0) return;
+    isTransitioning = true;
+    var currentSlide = letterSlides[currentLetterIndex];
+    var prevSlide = letterSlides[currentLetterIndex - 1];
+
+    if (prefersReduced) {
+      currentSlide.classList.add('hidden');
+      prevSlide.classList.remove('hidden');
+      currentLetterIndex--;
+      updateLetterUI();
+      isTransitioning = false;
+      return;
+    }
+
+    currentSlide.classList.add('leaving-back');
+    setTimeout(function () {
+      currentSlide.classList.add('hidden');
+      currentSlide.classList.remove('leaving-back');
+      prevSlide.classList.remove('hidden');
+      prevSlide.classList.add('entering-back');
+      void prevSlide.offsetWidth;
+      prevSlide.classList.remove('entering-back');
+      currentLetterIndex--;
+      updateLetterUI();
+      setTimeout(function () { isTransitioning = false; }, 400);
+    }, 380);
+  }
+
+  if (letterNextBtn) {
+    letterNextBtn.addEventListener('click', goToNextLetter);
+  }
+  if (letterBackBtn) {
+    letterBackBtn.addEventListener('click', goToPrevLetter);
+  }
+
+  // Keyboard support for letter
+  document.addEventListener('keydown', function (e) {
+    if (!main.classList.contains('show')) return;
+    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+    var key = e.key;
+    if (key === 'ArrowRight' || key === ' ' || key === 'Spacebar' || key === 'Enter') {
+      // avoid double-trigger if focus is on a button
+      if (document.activeElement && document.activeElement.tagName === 'BUTTON') return;
+      e.preventDefault();
+      goToNextLetter();
+    } else if (key === 'ArrowLeft') {
+      e.preventDefault();
+      goToPrevLetter();
+    }
+  });
+
+  // Swipe support for letter stage
+  if (letterStage) {
+    var touchStartX = 0;
+    var touchStartY = 0;
+    var touchMoved = false;
+    letterStage.addEventListener('touchstart', function (e) {
+      var t = e.touches[0];
+      touchStartX = t.clientX;
+      touchStartY = t.clientY;
+      touchMoved = false;
+    }, { passive: true });
+    letterStage.addEventListener('touchmove', function (e) {
+      touchMoved = true;
+    }, { passive: true });
+    letterStage.addEventListener('touchend', function (e) {
+      if (!touchMoved) return;
+      var t = e.changedTouches[0];
+      var dx = t.clientX - touchStartX;
+      var dy = t.clientY - touchStartY;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+        if (dx < 0) {
+          goToNextLetter();
+        } else {
+          goToPrevLetter();
+        }
+      }
+    }, { passive: true });
+  }
+
+  // Initialize letter reader UI
+  if (letterSlides.length) {
+    buildLetterDots();
+    updateLetterUI();
+  }
+
+  // ===== OPEN LETTER WITH ENVELOPE ANIMATION =====
   function openLetter() {
     if (prefersReduced) {
       proceedToLetter();

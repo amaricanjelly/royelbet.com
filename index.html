@@ -350,7 +350,7 @@ button .ripple {
 /* ========== MAIN CONTENT ========== */
 #main {
   display: none;
-  padding: 2.5rem 1.2rem 1rem;
+  padding: 1.5rem 1.2rem 1rem;
 }
 
 #main.show {
@@ -367,7 +367,7 @@ button .ripple {
 .paper {
   max-width: 900px;
   margin: 0 auto 4rem;
-  padding: clamp(1.2rem, 4vw, 2.5rem) clamp(1.2rem, 5vw, 3rem);
+  padding: clamp(1.2rem, 4vw, 2.5rem);
   background: linear-gradient(175deg, #FFF9F5 0%, #FEF0F3 45%, #FDE6EC 80%, #FCDEE8 100%);
   border: 1.5px solid var(--gold);
   border-radius: 8px;
@@ -378,13 +378,14 @@ button .ripple {
 .paper::before, .paper::after {
   content: '';
   position: absolute;
-  width: 120px;
-  height: 120px;
+  width: 64px;
+  height: 64px;
+  pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23C9A96E' stroke-width='1.2' opacity='0.55'%3E%3Cpath d='M5 50 Q5 5 50 5'/%3E%3Cpath d='M15 55 Q15 15 55 15'/%3E%3Cpath d='M8 30 Q8 8 30 8'/%3E%3C/g%3E%3Ccircle cx='28' cy='28' r='3.5' fill='%23C9A96E' opacity='0.45'/%3E%3Ccircle cx='42' cy='18' r='2' fill='%23C9A96E' opacity='0.35'/%3E%3Ccircle cx='18' cy='42' r='2' fill='%23C9A96E' opacity='0.35'/%3E%3C/svg%3E");
+  background-size: contain;
   background-repeat: no-repeat;
   top: 8px;
   left: 8px;
-  pointer-events: none;
 }
 
 .paper::after {
@@ -397,15 +398,15 @@ button .ripple {
 
 .paper h2 {
   font-family: var(--display);
-  font-size: clamp(1.7rem, 5vw, 2.4rem);
+  font-size: clamp(1.8rem, 5vw, 2.3rem);
   text-align: center;
   font-style: italic;
-  margin-bottom: 1.3rem;
+  margin-bottom: 1rem;
   color: var(--burg);
   letter-spacing: 0.02em;
   text-shadow: 0 1px 4px rgba(255, 248, 240, 0.9);
   position: relative;
-  padding-bottom: 0.7rem;
+  padding-bottom: 0.5rem;
   text-transform: uppercase;
 }
 
@@ -415,50 +416,24 @@ button .ripple {
   font-size: 1.1rem;
   color: var(--gold);
   letter-spacing: 0.8rem;
-  margin-top: 0.5rem;
+  margin-top: 0.4rem;
   font-style: normal;
 }
 
 /* ===== LETTER TEXT STYLING ===== */
 .letter p {
   font-family: var(--serif);
-  font-size: clamp(1rem, 2.6vw, 1.3rem);
+  font-size: clamp(1.15rem, 3vw, 1.6rem);
   font-weight: 500;
-  line-height: 1.7;
-  margin-bottom: 0;
+  line-height: 1.8;
+  margin-bottom: 1.4rem;
   white-space: pre-line;
   color: var(--burg);
   letter-spacing: 0.01em;
   text-transform: uppercase;
-  text-align: center;
 }
 
-/* First paragraph: title-like line */
-#letter .letter-title {
-  font-family: var(--display);
-  font-style: italic;
-  font-size: clamp(1.2rem, 3.2vw, 1.6rem);
-  text-align: center;
-  line-height: 1.5;
-  color: var(--burg);
-  text-shadow: 0 1px 6px rgba(255, 248, 240, 0.9);
-}
-
-/* Last paragraph: soft gold dashed box like .sign */
-#letter .letter-sign {
-  font-family: var(--serif);
-  font-size: clamp(1rem, 2.6vw, 1.3rem);
-  font-weight: 500;
-  line-height: 1.7;
-  text-align: center;
-  background: rgba(255, 248, 240, 0.85);
-  border: 2px dashed var(--gold);
-  border-radius: 12px;
-  padding: 1.2rem 1rem;
-  color: var(--burg);
-  text-transform: uppercase;
-  box-shadow: 0 4px 16px rgba(199, 125, 145, 0.12);
-}
+.letter p:last-child { margin-bottom: 0; }
 
 /* staggered reveal with blur */
 .rv {
@@ -473,6 +448,15 @@ button .ripple {
   transform: none;
   filter: blur(0);
 }
+
+/* stagger delays inside letter */
+#letter .rv:nth-child(1) { transition-delay: 0s; }
+#letter .rv:nth-child(2) { transition-delay: 0.08s; }
+#letter .rv:nth-child(3) { transition-delay: 0.16s; }
+#letter .rv:nth-child(4) { transition-delay: 0.24s; }
+#letter .rv:nth-child(5) { transition-delay: 0.32s; }
+#letter .rv:nth-child(6) { transition-delay: 0.4s; }
+#letter .rv:nth-child(7) { transition-delay: 0.48s; }
 
 .orn {
   text-align: center;
@@ -1069,31 +1053,39 @@ footer p:first-child {
 }
 
 /* ========== LETTER READER (ONE PARAGRAPH AT A TIME) ========== */
+/* All paragraphs are stacked in the same grid cell, so the box always
+   takes the height of the tallest paragraph. No clipping, no inner scroll. */
 #letter {
   position: relative;
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
 #letter .letter-stage {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
+  position: relative;
   width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  justify-items: stretch;
   padding: 0;
-  margin: 0;
-  overflow: visible;
 }
 
 #letter .letter-slide {
   grid-area: 1 / 1;
   width: 100%;
   margin: 0;
-  transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
+  text-align: center;
+  font-size: clamp(1rem, 2.6vw, 1.3rem);
+  line-height: 1.7;
+  transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease, visibility 0s;
   will-change: opacity, transform, filter;
 }
 
 #letter .letter-slide.hidden {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
 #letter .letter-slide.leaving-next {
@@ -1120,6 +1112,35 @@ footer p:first-child {
   filter: blur(4px);
 }
 
+/* First paragraph: title-like line */
+#letter .letter-title {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.4rem, 4vw, 1.9rem);
+  text-align: center;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--burg);
+  text-shadow: 0 1px 6px rgba(255, 248, 240, 0.9);
+}
+
+/* Last paragraph: soft gold dashed box */
+#letter .letter-sign {
+  font-family: var(--serif);
+  font-size: clamp(1rem, 2.6vw, 1.3rem);
+  font-weight: 500;
+  line-height: 1.7;
+  text-align: center;
+  background: rgba(255, 248, 240, 0.85);
+  border: 2px dashed var(--gold);
+  border-radius: 12px;
+  padding: 1.2rem 1.1rem;
+  margin: 0;
+  color: var(--burg);
+  text-transform: uppercase;
+  box-shadow: 0 4px 16px rgba(199, 125, 145, 0.12);
+}
+
 /* reduced motion: simple fade only */
 @media (prefers-reduced-motion: reduce) {
   #letter .letter-slide {
@@ -1139,10 +1160,8 @@ footer p:first-child {
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
-  margin-top: 1.6rem;
+  margin-top: 1.75rem;
   flex-wrap: wrap;
-  position: relative;
-  z-index: 3;
 }
 
 #letter .letter-controls button {
@@ -1167,10 +1186,8 @@ footer p:first-child {
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
-  margin-top: 1.1rem;
+  margin-top: 1rem;
   flex-wrap: wrap;
-  position: relative;
-  z-index: 3;
 }
 
 #letter .progress-dots .dot {
@@ -1194,11 +1211,9 @@ footer p:first-child {
   font-weight: 700;
   color: var(--rose);
   text-align: center;
-  margin-top: 0.7rem;
+  margin-top: 0.6rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  position: relative;
-  z-index: 3;
 }
 
 /* heart burst on next */
@@ -1222,8 +1237,7 @@ footer p:first-child {
   .katgolap-corner.tr { width: 210px; height: 210px; top: -35px; right: -45px; }
   .katgolap-corner.bl { width: 200px; height: 200px; bottom: -45px; left: -35px; }
   .katgolap-corner.br { width: 215px; height: 215px; bottom: -40px; right: -40px; }
-  .paper { padding: 1.4rem 1rem; }
-  .paper::before, .paper::after { width: 70px; height: 70px; }
+  .paper::before, .paper::after { width: 44px; height: 44px; }
   .grid { grid-template-columns: 1fr; }
   .card { border-radius: 40px 40px 14px 14px; padding: 1.6rem 1.1rem; }
   .card:nth-child(even) { border-radius: 14px 14px 40px 40px; }
@@ -1231,14 +1245,13 @@ footer p:first-child {
   .hug-illustration svg { width: 110px; }
   .ending-hug svg { width: 120px; }
   .float-decor { display: none; }
-  #letter .letter-title { font-size: clamp(1.05rem, 4.2vw, 1.3rem); }
-  #letter .letter-sign { padding: 1rem 0.85rem; }
+  #letter .letter-title { font-size: clamp(1.3rem, 5vw, 1.6rem); }
+  #letter .letter-sign { padding: 1rem 0.9rem; }
 }
 
 @media (min-width: 1200px) {
   #welcome h1 { font-size: 5rem; }
   #welcome .surprise-text { font-size: 2.2rem; }
-  .letter p { font-size: 1.3rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1646,6 +1659,7 @@ footer p:first-child {
 
   // Letter reader elements
   var letterEl = document.getElementById('letter');
+  var letterStage = letterEl ? letterEl.querySelector('.letter-stage') : null;
   var letterNextBtn = document.getElementById('letterNextBtn');
   var letterBackBtn = document.getElementById('letterBackBtn');
   var letterDots = document.getElementById('letterDots');
@@ -1657,147 +1671,120 @@ footer p:first-child {
   var visitorName = '';
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ===== MUSIC SYSTEM (invisible) =====
+  // ===== MUSIC SYSTEM (no visible UI) =====
   var audio = null;
   var musicFileIndex = 0;
   var musicStarted = false;
   var musicFadeTimer = null;
   var targetVolume = 0.4;
-  var retryListenerArmed = false;
+  var retryBound = false;
+  var retryUsed = false;
+  var musicWasPlaying = false;
 
-  function buildAudio(index) {
-    if (audio) {
-      // clean up old audio
-      audio.pause();
-      audio.onerror = null;
-      audio = null;
-    }
-    musicFileIndex = index;
-    var file = MUSIC_FILES[musicFileIndex];
-    if (!file) return false;
-    try {
-      audio = new Audio(encodeURI(file));
-      audio.loop = true;
-      audio.volume = 0;
-      audio.preload = 'auto';
-      audio.addEventListener('error', handleAudioError);
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  function handleAudioError() {
-    // try next file silently
-    var nextIndex = musicFileIndex + 1;
-    if (nextIndex < MUSIC_FILES.length) {
-      buildAudio(nextIndex);
-      if (audio && musicStarted) {
-        // try to keep playing the next candidate
-        audio.play().catch(function () {});
-      }
-    }
-    // if no more files, do nothing (silent)
-  }
-
-  function fadeInMusic() {
-    if (!audio) return;
+  function fadeInMusic(a) {
+    if (!a) return;
     if (musicFadeTimer) clearInterval(musicFadeTimer);
     var start = Date.now();
     var duration = 2000;
-    audio.volume = 0;
+    a.volume = 0;
     musicFadeTimer = setInterval(function () {
       var elapsed = Date.now() - start;
       var t = Math.min(elapsed / duration, 1);
       var vol = targetVolume * (1 - Math.pow(1 - t, 2));
-      try { audio.volume = Math.min(vol, targetVolume); } catch (e) {}
+      try { a.volume = Math.max(0, Math.min(vol, targetVolume)); } catch (e) {}
       if (t >= 1) {
         clearInterval(musicFadeTimer);
         musicFadeTimer = null;
-        try { audio.volume = targetVolume; } catch (e) {}
+        try { a.volume = targetVolume; } catch (e) {}
       }
     }, 50);
   }
 
-  function armRetryOnInteraction() {
-    if (retryListenerArmed) return;
-    retryListenerArmed = true;
-    function retry() {
-      document.removeEventListener('click', retry);
-      document.removeEventListener('touchstart', retry);
-      document.removeEventListener('keydown', retry);
-      retryListenerArmed = false;
-      if (!audio) return;
-      try {
-        var p = audio.play();
-        if (p && typeof p.then === 'function') {
-          p.then(function () {
-            musicStarted = true;
-            fadeInMusic();
-          }).catch(function () {});
-        }
-      } catch (e) {}
-    }
-    document.addEventListener('click', retry, { once: true });
-    document.addEventListener('touchstart', retry, { once: true, passive: true });
-    document.addEventListener('keydown', retry, { once: true });
-  }
+  function createAudio(index) {
+    var a = new Audio();
+    a.loop = true;
+    a.preload = 'auto';
+    a.volume = 0;
+    var faded = false;
 
-  function startMusicDirectly() {
-    // MUST be called directly inside a user gesture handler
-    if (!audio) {
-      if (!buildAudio(0)) return;
-    }
-    try {
-      var playPromise = audio.play();
-      if (playPromise && typeof playPromise.then === 'function') {
-        playPromise.then(function () {
-          musicStarted = true;
-          fadeInMusic();
-        }).catch(function () {
-          // blocked — try next file silently, then arm one-time retry
-          if (musicFileIndex + 1 < MUSIC_FILES.length) {
-            buildAudio(musicFileIndex + 1);
-            if (audio) {
-              try {
-                var p2 = audio.play();
-                if (p2 && typeof p2.then === 'function') {
-                  p2.then(function () {
-                    musicStarted = true;
-                    fadeInMusic();
-                  }).catch(function () {
-                    armRetryOnInteraction();
-                  });
-                }
-              } catch (e) {
-                armRetryOnInteraction();
-              }
-            }
-          } else {
-            armRetryOnInteraction();
-          }
-        });
-      } else {
-        musicStarted = true;
-        fadeInMusic();
+    a.addEventListener('playing', function () {
+      if (a !== audio) return;
+      musicStarted = true;
+      if (!faded) {
+        faded = true;
+        fadeInMusic(a);
       }
+    });
+
+    a.addEventListener('error', function () {
+      // file failed to load -> silently try the next filename
+      if (a !== audio) return;
+      if (musicFileIndex + 1 < MUSIC_FILES.length) {
+        musicFileIndex++;
+        audio = createAudio(musicFileIndex);
+        tryPlay();
+      }
+    });
+
+    a.src = encodeURI(MUSIC_FILES[index]);
+    return a;
+  }
+
+  function tryPlay() {
+    if (!audio) return;
+    var p;
+    try {
+      p = audio.play();
     } catch (e) {
-      armRetryOnInteraction();
+      bindRetry();
+      return;
+    }
+    if (p && typeof p.catch === 'function') {
+      p.catch(function (err) {
+        // only autoplay-block errors need the retry; load errors are handled by the error event
+        if (err && err.name === 'NotAllowedError') bindRetry();
+      });
     }
   }
 
-  // Pause when tab hidden, resume when visible
+  // MUST be called directly (synchronously) inside a user-gesture handler
+  function startMusic() {
+    if (musicStarted) return;
+    if (!audio) audio = createAudio(musicFileIndex);
+    tryPlay();
+  }
+
+  // invisible safety net: retry once on the next click / tap / keypress
+  function bindRetry() {
+    if (retryBound || retryUsed || musicStarted) return;
+    retryBound = true;
+    var events = ['click', 'touchstart', 'keydown'];
+    var handler = function () {
+      events.forEach(function (ev) { document.removeEventListener(ev, handler, true); });
+      retryBound = false;
+      retryUsed = true;
+      if (!musicStarted) {
+        if (!audio) audio = createAudio(musicFileIndex);
+        tryPlay();
+      }
+    };
+    events.forEach(function (ev) { document.addEventListener(ev, handler, true); });
+  }
+
+  // Pause music when tab hidden, resume when visible
   document.addEventListener('visibilitychange', function () {
     if (!audio) return;
     if (document.hidden) {
       if (!audio.paused) {
+        musicWasPlaying = true;
         audio.pause();
-        audio.dataset.wasPlaying = '1';
       }
     } else {
-      if (audio.dataset.wasPlaying === '1' && musicStarted) {
-        audio.play().catch(function () {});
-        delete audio.dataset.wasPlaying;
+      if (musicWasPlaying) {
+        musicWasPlaying = false;
+        var p;
+        try { p = audio.play(); } catch (e) {}
+        if (p && typeof p.catch === 'function') p.catch(function () {});
       }
     }
   });
@@ -1867,8 +1854,8 @@ footer p:first-child {
 
   if (nameSubmitBtn) {
     nameSubmitBtn.addEventListener('click', function () {
-      // start music FIRST — directly inside the click handler
-      startMusicDirectly();
+      // start music FIRST — directly inside the click handler, before anything else
+      startMusic();
       submitName();
     });
   }
@@ -1876,8 +1863,8 @@ footer p:first-child {
     visitorNameInput.addEventListener('keydown', function (e) {
       if (e.key === 'Enter') {
         e.preventDefault();
-        // start music FIRST — directly inside the keydown handler
-        startMusicDirectly();
+        // start music FIRST — directly inside the keydown handler, before anything else
+        startMusic();
         submitName();
       }
     });
@@ -1947,27 +1934,34 @@ footer p:first-child {
   }
 
   function updateLetterUI() {
+    // slides visibility (all slides stay in the same grid cell; hidden ones are invisible)
     for (var i = 0; i < letterTotal; i++) {
       if (i === currentLetterIndex) {
         letterSlides[i].classList.remove('hidden');
+        letterSlides[i].removeAttribute('aria-hidden');
         letterSlides[i].classList.remove('leaving-next', 'leaving-back', 'entering-next', 'entering-back');
       } else {
         letterSlides[i].classList.add('hidden');
+        letterSlides[i].setAttribute('aria-hidden', 'true');
         letterSlides[i].classList.remove('leaving-next', 'leaving-back', 'entering-next', 'entering-back');
       }
     }
+    // dots
     if (letterDots) {
       var dots = letterDots.querySelectorAll('.dot');
       for (var j = 0; j < dots.length; j++) {
         dots[j].classList.toggle('active', j === currentLetterIndex);
       }
     }
+    // counter
     if (letterCounter) {
       letterCounter.textContent = (currentLetterIndex + 1) + ' / ' + letterTotal;
     }
+    // back button
     if (letterBackBtn) {
       letterBackBtn.style.display = currentLetterIndex === 0 ? 'none' : 'inline-block';
     }
+    // next button text
     if (letterNextBtn) {
       if (currentLetterIndex === letterTotal - 1) {
         letterNextBtn.textContent = 'Continue ❤️';
@@ -1975,6 +1969,7 @@ footer p:first-child {
         letterNextBtn.textContent = 'Next 💌';
       }
     }
+    // ornament only on last slide
     if (letterOrnament) {
       letterOrnament.style.visibility = (currentLetterIndex === letterTotal - 1) ? 'visible' : 'hidden';
     }
@@ -2009,7 +2004,9 @@ footer p:first-child {
   function goToNextLetter() {
     if (isTransitioning) return;
     if (currentLetterIndex >= letterTotal - 1) {
+      // last slide — Continue action
       if (letterOrnament) letterOrnament.style.visibility = 'visible';
+      // smooth scroll to next section
       var nextSection = document.querySelector('.special-friendship');
       if (nextSection) {
         nextSection.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
@@ -2037,6 +2034,7 @@ footer p:first-child {
       currentSlide.classList.remove('leaving-next');
       nextSlide.classList.remove('hidden');
       nextSlide.classList.add('entering-next');
+      // force reflow
       void nextSlide.offsetWidth;
       nextSlide.classList.remove('entering-next');
       currentLetterIndex++;
@@ -2088,6 +2086,7 @@ footer p:first-child {
     if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
     var key = e.key;
     if (key === 'ArrowRight' || key === ' ' || key === 'Spacebar' || key === 'Enter') {
+      // avoid double-trigger if focus is on a button
       if (document.activeElement && document.activeElement.tagName === 'BUTTON') return;
       e.preventDefault();
       goToNextLetter();
@@ -2097,21 +2096,21 @@ footer p:first-child {
     }
   });
 
-  // Swipe support for letter
-  if (letterEl) {
+  // Swipe support for letter stage
+  if (letterStage) {
     var touchStartX = 0;
     var touchStartY = 0;
     var touchMoved = false;
-    letterEl.addEventListener('touchstart', function (e) {
+    letterStage.addEventListener('touchstart', function (e) {
       var t = e.touches[0];
       touchStartX = t.clientX;
       touchStartY = t.clientY;
       touchMoved = false;
     }, { passive: true });
-    letterEl.addEventListener('touchmove', function () {
+    letterStage.addEventListener('touchmove', function (e) {
       touchMoved = true;
     }, { passive: true });
-    letterEl.addEventListener('touchend', function (e) {
+    letterStage.addEventListener('touchend', function (e) {
       if (!touchMoved) return;
       var t = e.changedTouches[0];
       var dx = t.clientX - touchStartX;
@@ -2126,6 +2125,7 @@ footer p:first-child {
     }, { passive: true });
   }
 
+  // Initialize letter reader UI
   if (letterSlides.length) {
     buildLetterDots();
     updateLetterUI();
@@ -2137,9 +2137,11 @@ footer p:first-child {
       proceedToLetter();
       return;
     }
+    // Show envelope overlay
     envelopeOverlay.classList.add('show');
     envelopeOverlay.setAttribute('aria-hidden', 'false');
 
+    // Heart burst from envelope
     setTimeout(function () {
       var env = envelopeOverlay.querySelector('.envelope');
       if (env) {
@@ -2167,6 +2169,7 @@ footer p:first-child {
       }
     }, 300);
 
+    // Confetti + sparkles from envelope
     setTimeout(function () {
       var env = envelopeOverlay.querySelector('.envelope');
       if (env) {
@@ -2175,6 +2178,7 @@ footer p:first-child {
       }
     }, 500);
 
+    // After animation, go to main
     setTimeout(function () {
       envelopeOverlay.classList.remove('show');
       envelopeOverlay.setAttribute('aria-hidden', 'true');
@@ -2234,9 +2238,11 @@ footer p:first-child {
       promiseMessage.textContent = 'Promise Locked Forever! 🔐🎀';
       promiseMessage.classList.add('show');
 
+      // Screen glow
       promiseCard.classList.add('glow');
       setTimeout(function () { promiseCard.classList.remove('glow'); }, 1700);
 
+      // Big confetti + hearts
       var rect = promiseBtn.getBoundingClientRect();
       spawnConfetti(rect.left + rect.width / 2, rect.top, 36);
 
@@ -2270,9 +2276,11 @@ footer p:first-child {
     hugBtn.addEventListener('click', function () {
       hugMessage.textContent = 'A BIG HUG SENT YOUR WAY! 🫂❤️';
       hugMessage.classList.remove('show');
+      // force reflow to restart animation
       void hugMessage.offsetWidth;
       hugMessage.classList.add('show');
 
+      // Animate the hugging characters
       if (hugIllustration) {
         hugIllustration.classList.remove('animated');
         void hugIllustration.offsetWidth;
@@ -2280,6 +2288,7 @@ footer p:first-child {
         setTimeout(function () { hugIllustration.classList.remove('animated'); }, 800);
       }
 
+      // Floating hearts
       var emojis = ['❤️', '🫂', '💗', '🎀', '💖'];
       for (var i = 0; i < 12; i++) {
         (function (idx) {
@@ -2340,6 +2349,7 @@ footer p:first-child {
     }
   }
 
+  // pause petals when tab hidden
   document.addEventListener('visibilitychange', function () {
     if (document.hidden) {
       petalLayer.style.display = 'none';
@@ -2376,10 +2386,11 @@ footer p:first-child {
     }, { passive: true });
   }
 
-  // ===== MEMORY CARDS =====
+  // ===== MEMORY CARDS: tilt on hover + sparkle burst on tap =====
   var cards = document.querySelectorAll('.card');
   cards.forEach(function (card) {
-    card.addEventListener('click', function () {
+    card.addEventListener('click', function (e) {
+      // sparkle burst
       var rect = card.getBoundingClientRect();
       var cx = rect.left + rect.width / 2;
       var cy = rect.top + rect.height / 2;
@@ -2407,6 +2418,7 @@ footer p:first-child {
           }, idx * 40);
         })(i);
       }
+      // tilt
       card.classList.add('tilted');
       setTimeout(function () { card.classList.remove('tilted'); }, 500);
     });
@@ -2419,6 +2431,7 @@ footer p:first-child {
         el.classList.add('in');
       });
     };
+    // hide petals
     if (petalLayer) petalLayer.style.display = 'none';
   }
 
